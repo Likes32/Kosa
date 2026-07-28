@@ -70,15 +70,23 @@
   .topbar{position:fixed;top:0;left:0;height:2px;width:0;background:var(--amber);z-index:80;display:none}
 
   /* ---------- nav ---------- */
-  .nav{position:fixed;top:0;left:0;right:0;z-index:90;display:flex;align-items:center;justify-content:space-between;padding:clamp(18px,2.4vw,26px) clamp(22px,5vw,64px);mix-blend-mode:difference;color:#fff}
-  .nav .brand{font-family:var(--f-disp);font-size:clamp(1.5rem,2.1vw,1.85rem);font-weight:700}
+  .nav{position:fixed;top:0;left:0;right:0;z-index:90;display:flex;align-items:center;justify-content:space-between;padding:clamp(16px,2.3vw,26px) clamp(20px,5vw,64px);color:#F1EADB;border:1px solid transparent;
+    transition:padding .55s var(--ease),left .55s var(--ease),right .55s var(--ease),top .55s var(--ease),background .5s ease,backdrop-filter .5s ease,border-radius .55s var(--ease),box-shadow .5s ease,border-color .5s ease}
+  .nav .brand,.nav .links a,.nav .burger span{text-shadow:0 1px 14px rgba(0,0,0,.5)}
+  .nav.scrolled{top:12px;left:clamp(10px,3vw,26px);right:clamp(10px,3vw,26px);padding:11px clamp(16px,2.4vw,30px);
+    background:rgba(19,16,11,.5);-webkit-backdrop-filter:blur(18px) saturate(155%);backdrop-filter:blur(18px) saturate(155%);
+    border-radius:16px;border-color:rgba(255,255,255,.1);box-shadow:0 12px 38px -16px rgba(0,0,0,.62),inset 0 1px 0 rgba(255,255,255,.16)}
+  .nav.scrolled .brand,.nav.scrolled .links a,.nav.scrolled .burger span{text-shadow:none}
+  .nav.scrolled .brand{font-size:1.3rem}
+  .nav.scrolled .links a{font-size:.76rem}
+  .nav .brand{font-family:var(--f-disp);font-size:clamp(1.5rem,2.1vw,1.85rem);font-weight:700;transition:font-size .5s var(--ease)}
   .nav .brand i{font-style:normal;color:var(--amber-lt)}
   .nav .links{display:flex;gap:26px}
-  .nav .links a{font-family:var(--f-mono);font-size:.82rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;opacity:1;position:relative;padding:6px 0}
-  .nav .links a::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;background:#fff;transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease)}
+  .nav .links a{font-family:var(--f-mono);font-size:.82rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;opacity:1;position:relative;padding:6px 0;transition:font-size .5s var(--ease)}
+  .nav .links a::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;background:var(--amber-lt);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease)}
   .nav .links a:hover::after{transform:scaleX(1)}
-  .nav .burger{display:none;background:none;border:0;color:#fff;width:40px;height:40px;flex-direction:column;gap:5px;justify-content:center;cursor:pointer;padding:8px}
-  .nav .burger span{height:1.5px;background:#fff;transition:.35s var(--ease)}
+  .nav .burger{display:none;background:none;border:0;color:#F1EADB;width:40px;height:40px;flex-direction:column;gap:5px;justify-content:center;cursor:pointer;padding:8px}
+  .nav .burger span{height:1.5px;background:#F1EADB;transition:.35s var(--ease)}
 
   /* ---------- hero ---------- */
   .hero{position:relative;height:100svh;min-height:600px;overflow:hidden;display:flex;align-items:flex-end}
@@ -274,8 +282,6 @@
 <body>
 
 <div class="grain" aria-hidden="true"></div>
-<div class="cursor" id="cursor" aria-hidden="true"></div>
-<div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
 
 <div class="preloader" id="preloader" aria-hidden="true">
   <div class="pl-word"><span>Куршская&nbsp;коса</span></div>
@@ -552,7 +558,7 @@
   /* ----- Lenis smooth scroll ----- */
   var lenis = null, scrollY = function(){ return window.pageYOffset || html.scrollTop; };
   if(window.Lenis && !reduce){
-    lenis = new Lenis({ lerp:.09, wheelMultiplier:1 });
+    lenis = new Lenis({ duration:1.15, easing:function(t){return Math.min(1,1.001-Math.pow(2,-10*t));}, wheelMultiplier:.92, touchMultiplier:1.6 });
     scrollY = function(){ return lenis.scroll; };
     if(hasGSAP){
       lenis.on('scroll', ScrollTrigger.update);
@@ -596,24 +602,14 @@
     for(var i=0;i<stops.length;i++){ if(p >= stops[i].p) s = stops[i]; }
     if(plName && plName.textContent !== s.name){ plName.textContent = s.name; }
     if(plKm) plKm.textContent = Math.round(p*48)+' КМ';
+    if(nav) nav.classList.toggle('scrolled', scrollY() > 60);
   }
   var ticking=false;
   function onScroll(){ if(!ticking){ requestAnimationFrame(function(){ updateThread(); ticking=false; }); ticking=true; } }
   (lenis ? lenis.on('scroll', onScroll) : window.addEventListener('scroll', onScroll, {passive:true}));
   window.addEventListener('resize', updateThread); updateThread();
 
-  /* ----- custom cursor ----- */
-  var cur = document.getElementById('cursor'), dot = document.getElementById('cursorDot');
-  if(matchMedia('(hover:hover)').matches && !reduce){
-    document.body.classList.add('hide-native');
-    var cx=innerWidth/2, cy=innerHeight/2, dx=cx, dy=cy;
-    window.addEventListener('mousemove', function(e){ cx=e.clientX; cy=e.clientY; dot.style.transform='translate('+cx+'px,'+cy+'px) translate(-50%,-50%)'; });
-    (function loop(){ dx+=(cx-dx)*.16; dy+=(cy-dy)*.16; cur.style.transform='translate('+dx+'px,'+dy+'px) translate(-50%,-50%)'; requestAnimationFrame(loop); })();
-    document.querySelectorAll('a,button,[data-hover],.grid figure').forEach(function(el){
-      el.addEventListener('mouseenter', function(){ cur.classList.add('grow'); });
-      el.addEventListener('mouseleave', function(){ cur.classList.remove('grow'); });
-    });
-  }
+  /* custom cursor removed — native cursor restored */
 
   /* ----- reveals + count-up ----- */
   function countUp(el){
@@ -641,11 +637,11 @@
         scrollTrigger:{trigger:el.closest('.big'),start:'top 78%'},delay:i*0.06});
     });
     /* hero parallax */
-    gsap.to('#heroMedia',{yPercent:22,ease:'none',scrollTrigger:{trigger:'#top',start:'top top',end:'bottom top',scrub:true}});
+    gsap.to('#heroMedia',{yPercent:22,ease:'none',scrollTrigger:{trigger:'#top',start:'top top',end:'bottom top',scrub:1.1}});
     /* scene image parallax */
     gsap.utils.toArray('.scene-media, .closing-media').forEach(function(m){
       gsap.fromTo(m,{yPercent:-8},{yPercent:8,ease:'none',
-        scrollTrigger:{trigger:m.parentElement,start:'top bottom',end:'bottom top',scrub:true}});
+        scrollTrigger:{trigger:m.parentElement,start:'top bottom',end:'bottom top',scrub:1.1}});
     });
     /* count-ups */
     gsap.utils.toArray('.fact .n').forEach(function(el){
