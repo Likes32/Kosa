@@ -62,9 +62,9 @@
   .thread .rail{position:relative;width:1px;height:min(52vh,440px);background:rgba(255,255,255,.28)}
   .thread .fill{position:absolute;top:0;left:0;width:100%;height:0;background:var(--amber-lt)}
   .thread .tick{position:absolute;left:50%;width:9px;height:1px;background:rgba(255,255,255,.55);transform:translateX(-50%)}
-  .thread .cap{position:absolute;left:-14px;transform:translate(-100%,-50%);white-space:nowrap;text-align:right;color:#fff}
+  .thread .cap{position:absolute;left:-14px;transform:translate(-100%,-50%);white-space:nowrap;text-align:right;color:#fff;transition:opacity .35s var(--ease)}
   .thread .cap .pl{font-family:var(--f-disp);font-size:1rem;font-weight:700;line-height:1}
-  .thread .cap .km{font-family:var(--f-mono);font-size:.62rem;letter-spacing:.15em;opacity:.75;margin-top:4px}
+  .thread .cap .km{font-family:var(--f-mono);font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;opacity:.75;margin-top:4px}
   .thread .ends{position:absolute;left:50%;transform:translateX(-50%);font-family:var(--f-mono);font-size:.58rem;letter-spacing:.2em;color:rgba(255,255,255,.6)}
   .thread .ends.top{top:-22px}.thread .ends.bot{bottom:-22px}
   .topbar{position:fixed;top:0;left:0;height:2px;width:0;background:var(--amber);z-index:80;display:none}
@@ -293,7 +293,7 @@
   <div class="rail">
     <span class="ends top">С · 48 КМ</span>
     <div class="fill" id="threadFill"></div>
-    <div class="tick" id="threadTick" style="top:0"><div class="cap"><div class="pl" id="threadPl">Зеленоградск</div><div class="km" id="threadKm">0 КМ</div></div></div>
+    <div class="tick" id="threadTick" style="top:0"><div class="cap"><div class="pl" id="threadPl">Куршская коса</div><div class="km" id="threadKm">старт</div></div></div>
     <span class="ends bot">Ю · 0 КМ</span>
   </div>
 </div>
@@ -310,7 +310,7 @@
 </nav>
 
 <!-- HERO -->
-<header class="hero" id="top">
+<header class="hero" id="top" data-place="Куршская коса" data-sub="старт">
   <div class="hero-media" id="heroMedia"><img class="grade" src="photos/cine-hero.jpg" alt="Туманный берег Куршской косы на рассвете"></div>
   <div class="hero-scrim"></div>
   <div class="hero-inner">
@@ -324,7 +324,7 @@
 </header>
 
 <!-- MANIFESTO -->
-<section class="manifesto" id="about">
+<section class="manifesto" id="about" data-place="О косе" data-sub="введение">
   <div class="wrap">
     <p class="idx mono reveal">↳ О месте</p>
     <div class="big">
@@ -346,7 +346,7 @@
 
 <!-- SCENES -->
 <div id="places">
-<section class="scene bl">
+<section class="scene bl" data-place="Высота Эфа" data-sub="дюны">
   <div class="scene-media"><img class="grade" src="photos/cine-dune.jpg" alt="Золотая кочующая дюна, стекающая к морю"></div>
   <div class="scene-scrim"></div>
   <div class="wrap"><div class="scene-body">
@@ -357,7 +357,7 @@
   </div></div>
 </section>
 
-<section class="scene br">
+<section class="scene br" data-place="Танцующий лес" data-sub="лес">
   <div class="scene-media"><img class="grade" src="photos/dancing-forest.jpg" alt="Сосны Танцующего леса, свёрнутые в кольца"></div>
   <div class="scene-scrim"></div>
   <div class="wrap"><div class="scene-body">
@@ -368,7 +368,7 @@
   </div></div>
 </section>
 
-<section class="scene cc">
+<section class="scene cc" data-place="Птичий мост" data-sub="птицы">
   <div class="scene-media"><img class="grade" src="photos/cine-rays.jpg" alt="Лучи света сквозь туман над косой"></div>
   <div class="scene-scrim"></div>
   <div class="wrap"><div class="scene-body">
@@ -379,7 +379,7 @@
   </div></div>
 </section>
 
-<section class="scene bl">
+<section class="scene bl" data-place="Два берега" data-sub="вода">
   <div class="scene-media"><img class="grade" src="photos/cine-sea.jpg" alt="Хмурое Балтийское море в тумане"></div>
   <div class="scene-scrim"></div>
   <div class="wrap"><div class="scene-body">
@@ -392,7 +392,7 @@
 </div>
 
 <!-- ROUTE MAP -->
-<section class="route" id="route">
+<section class="route" id="route" data-place="Маршрут" data-sub="вся коса">
   <div class="wrap">
     <div class="head">
       <span class="mono reveal">Маршрут · 48 км с юга на север</span>
@@ -453,7 +453,7 @@
 </section>
 
 <!-- FACTS -->
-<section class="facts">
+<section class="facts" data-place="В цифрах" data-sub="факты">
   <div class="wrap">
     <div class="head">
       <h2 class="reveal">Коса в цифрах</h2>
@@ -469,7 +469,7 @@
 </section>
 
 <!-- GALLERY -->
-<section class="gallery" id="gallery">
+<section class="gallery" id="gallery" data-place="Галерея" data-sub="краски">
   <div class="wrap">
     <div class="head">
       <h2 class="reveal">Краски косы</h2>
@@ -488,7 +488,7 @@
 </section>
 
 <!-- CLOSING -->
-<section class="closing" id="visit">
+<section class="closing" id="visit" data-place="Золотой час" data-sub="закат">
   <div class="closing-media"><img class="grade" src="photos/sunset.jpg" alt="Закат над Балтийским морем"></div>
   <div class="closing-scrim"></div>
   <div class="closing-body">
@@ -558,7 +558,7 @@
   /* ----- Lenis smooth scroll ----- */
   var lenis = null, scrollY = function(){ return window.pageYOffset || html.scrollTop; };
   if(window.Lenis && !reduce){
-    lenis = new Lenis({ duration:1.15, easing:function(t){return Math.min(1,1.001-Math.pow(2,-10*t));}, wheelMultiplier:.92, touchMultiplier:1.6 });
+    lenis = new Lenis({ duration:1.35, easing:function(t){return Math.min(1,1.001-Math.pow(2,-10*t));}, wheelMultiplier:.82, touchMultiplier:1.6, smoothWheel:true });
     scrollY = function(){ return lenis.scroll; };
     if(hasGSAP){
       lenis.on('scroll', ScrollTrigger.update);
@@ -587,21 +587,31 @@
   var fill = document.getElementById('threadFill'), tick = document.getElementById('threadTick'),
       plName = document.getElementById('threadPl'), plKm = document.getElementById('threadKm'),
       topbar = document.getElementById('topbar');
-  var stops = [
-    {p:0.00,name:'Зеленоградск',km:0},{p:0.18,name:'Лесной',km:11},
-    {p:0.40,name:'Королевский бор',km:20},{p:0.58,name:'Фрингилла',km:32},
-    {p:0.78,name:'Высота Эфа',km:42},{p:1.00,name:'Морское',km:48}
-  ];
+  var placeSecs = [].slice.call(document.querySelectorAll('[data-place]'));
+  var curPlace = '';
   function updateThread(){
-    var max = document.body.scrollHeight - window.innerHeight;
+    var vh = window.innerHeight;
+    var max = document.body.scrollHeight - vh;
     var p = max>0 ? Math.min(1, Math.max(0, scrollY()/max)) : 0;
     if(fill) fill.style.height = (p*100)+'%';
     if(tick) tick.style.top = (p*100)+'%';
     if(topbar) topbar.style.width = (p*100)+'%';
-    var s = stops[0];
-    for(var i=0;i<stops.length;i++){ if(p >= stops[i].p) s = stops[i]; }
-    if(plName && plName.textContent !== s.name){ plName.textContent = s.name; }
-    if(plKm) plKm.textContent = Math.round(p*48)+' КМ';
+    var mid = vh*0.42, active = placeSecs[0] || null;
+    for(var i=0;i<placeSecs.length;i++){
+      if(placeSecs[i].getBoundingClientRect().top <= mid) active = placeSecs[i];
+    }
+    if(active && active.getAttribute('data-place') !== curPlace){
+      curPlace = active.getAttribute('data-place');
+      var cap = plName ? plName.parentNode : null, ap = active;
+      if(cap){
+        cap.style.opacity = '0';
+        setTimeout(function(){
+          if(plName) plName.textContent = ap.getAttribute('data-place');
+          if(plKm) plKm.textContent = ap.getAttribute('data-sub') || '';
+          cap.style.opacity = '1';
+        }, 160);
+      }
+    }
     if(nav) nav.classList.toggle('scrolled', scrollY() > 60);
   }
   var ticking=false;
@@ -637,11 +647,11 @@
         scrollTrigger:{trigger:el.closest('.big'),start:'top 78%'},delay:i*0.06});
     });
     /* hero parallax */
-    gsap.to('#heroMedia',{yPercent:22,ease:'none',scrollTrigger:{trigger:'#top',start:'top top',end:'bottom top',scrub:1.1}});
+    gsap.to('#heroMedia',{yPercent:22,ease:'none',scrollTrigger:{trigger:'#top',start:'top top',end:'bottom top',scrub:1.5}});
     /* scene image parallax */
     gsap.utils.toArray('.scene-media, .closing-media').forEach(function(m){
       gsap.fromTo(m,{yPercent:-8},{yPercent:8,ease:'none',
-        scrollTrigger:{trigger:m.parentElement,start:'top bottom',end:'bottom top',scrub:1.1}});
+        scrollTrigger:{trigger:m.parentElement,start:'top bottom',end:'bottom top',scrub:1.5}});
     });
     /* count-ups */
     gsap.utils.toArray('.fact .n').forEach(function(el){
