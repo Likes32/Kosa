@@ -71,10 +71,10 @@
 
   /* ---------- nav ---------- */
   .nav{position:fixed;top:0;left:0;right:0;z-index:90;display:flex;align-items:center;justify-content:space-between;padding:clamp(18px,2.4vw,26px) clamp(22px,5vw,64px);mix-blend-mode:difference;color:#fff}
-  .nav .brand{font-family:var(--f-disp);font-size:1.28rem;font-weight:700}
+  .nav .brand{font-family:var(--f-disp);font-size:clamp(1.5rem,2.1vw,1.85rem);font-weight:700}
   .nav .brand i{font-style:normal;color:var(--amber-lt)}
   .nav .links{display:flex;gap:26px}
-  .nav .links a{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;opacity:.85;position:relative;padding:4px 0}
+  .nav .links a{font-family:var(--f-mono);font-size:.82rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;opacity:1;position:relative;padding:6px 0}
   .nav .links a::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;background:#fff;transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease)}
   .nav .links a:hover::after{transform:scaleX(1)}
   .nav .burger{display:none;background:none;border:0;color:#fff;width:40px;height:40px;flex-direction:column;gap:5px;justify-content:center;cursor:pointer;padding:8px}
@@ -85,7 +85,7 @@
   .hero-media{position:absolute;inset:-4% 0;z-index:1;will-change:transform}
   .hero-media img{width:100%;height:100%;object-fit:cover;transform:scale(1.04);animation:heroZoom 18s ease-out forwards}
   @keyframes heroZoom{to{transform:scale(1.12)}}
-  .hero-scrim{position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(10,8,5,.5),transparent 22%),linear-gradient(0deg,rgba(10,8,5,.82),rgba(10,8,5,.1) 44%,transparent 62%)}
+  .hero-scrim{position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(10,8,5,.66),transparent 26%),linear-gradient(0deg,rgba(10,8,5,.82),rgba(10,8,5,.1) 44%,transparent 62%)}
   .hero-inner{position:relative;z-index:3;width:100%;padding-bottom:clamp(56px,9vh,120px);color:var(--cream)}
   .hero .eyebrow{color:var(--sand);margin:0 0 22px;overflow:hidden}
   .hero .eyebrow span{display:inline-block;transform:translateY(110%);animation:up 1s .2s var(--ease) forwards}
@@ -126,15 +126,37 @@
   .scene.bl{align-items:flex-end;justify-content:flex-start;text-align:left}
   .scene.br{align-items:flex-end;justify-content:flex-end;text-align:right}
   .scene.cc{align-items:center;justify-content:center;text-align:center}
-  .scene.bl .scene-scrim{background:linear-gradient(60deg,rgba(8,7,4,.8),rgba(8,7,4,.15) 55%,transparent),linear-gradient(0deg,rgba(8,7,4,.55),transparent 40%)}
-  .scene.br .scene-scrim{background:linear-gradient(300deg,rgba(8,7,4,.8),rgba(8,7,4,.15) 55%,transparent),linear-gradient(0deg,rgba(8,7,4,.5),transparent 40%)}
-  .scene.cc .scene-scrim{background:radial-gradient(120% 90% at 50% 55%,transparent 30%,rgba(8,7,4,.72))}
+  .scene.bl .scene-scrim{background:linear-gradient(58deg,rgba(6,6,4,.88),rgba(6,6,4,.22) 60%,transparent),linear-gradient(0deg,rgba(6,6,4,.78),rgba(6,6,4,.24) 46%,transparent 64%)}
+  .scene.br .scene-scrim{background:linear-gradient(302deg,rgba(6,6,4,.88),rgba(6,6,4,.22) 60%,transparent),linear-gradient(0deg,rgba(6,6,4,.76),rgba(6,6,4,.24) 46%,transparent 64%)}
+  .scene.cc .scene-scrim{background:radial-gradient(130% 100% at 50% 60%,transparent 20%,rgba(6,6,4,.82))}
   .scene-body{position:relative;z-index:3;padding:clamp(48px,8vh,110px) 0;max-width:640px}
   .scene .meta{color:var(--sand);margin:0 0 20px}
   .scene h2{font-size:clamp(2.6rem,8vw,6.6rem);color:#F6EFE0}
   .scene .txt{margin:26px 0 0;color:var(--cream-dim);font-size:clamp(1rem,1.4vw,1.2rem);max-width:46ch}
   .scene.br .scene-body{margin-left:auto}.scene.br .txt{margin-left:auto}
   .scene.cc .scene-body{margin:0 auto}.scene.cc .txt{margin-left:auto;margin-right:auto}
+  .scene .detail{margin:20px 0 0;color:var(--sand)}
+  .scene.br .detail{margin-left:auto}
+  .scene.cc .detail{margin-left:auto;margin-right:auto}
+
+  /* ---------- route map (illustrated) ---------- */
+  .route{background:var(--night);color:var(--cream);padding:clamp(80px,13vh,160px) 0;overflow:hidden}
+  .route .head{text-align:center;margin-bottom:clamp(36px,5vh,60px)}
+  .route .head .mono{color:var(--sand);display:block;margin-bottom:18px}
+  .route .head h2{font-size:clamp(2rem,5vw,3.6rem)}
+  .route .map{max-width:540px;margin:0 auto}
+  .route svg{width:100%;height:auto;display:block;overflow:visible}
+  .route .road-bg{fill:none;stroke:rgba(236,229,215,.12);stroke-width:2.4;stroke-linecap:round}
+  .route .road{fill:none;stroke:#EFEADD;stroke-width:2.6;stroke-linecap:round}
+  .route .conn{stroke:rgba(236,229,215,.3);stroke-width:1}
+  .route .dot{fill:var(--night);stroke:#EFEADD;stroke-width:2.2}
+  .route .dot-key{fill:var(--amber);stroke:#F3EEE1;stroke-width:2}
+  .route .ring{fill:none;stroke:var(--amber);stroke-width:1;opacity:.55}
+  .route .nm{fill:#F3EEE1;font-family:var(--f-disp);font-weight:700;font-size:23px}
+  .route .tag{fill:var(--fog);font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+  .route .side{fill:rgba(236,229,215,.36);font-family:var(--f-mono);font-size:12px;letter-spacing:.24em;text-transform:uppercase}
+  .route .compass{fill:var(--sand);font-family:var(--f-mono);font-size:13px;letter-spacing:.2em}
+  .route .mapnote{text-align:center;color:var(--fog);font-family:var(--f-mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;margin-top:clamp(26px,4vh,42px)}
 
   /* ---------- facts ---------- */
   .facts{background:var(--paper);color:var(--ink);padding:clamp(90px,14vh,170px) 0}
@@ -212,6 +234,31 @@
     .facts-grid{grid-template-columns:1fr}
     .grid{grid-template-columns:1fr 1fr}
     .g1,.g2,.g6,.g7{grid-column:span 2;grid-row:span 2}.g3,.g4,.g5{grid-column:span 1}
+  }
+  /* ---- mobile premium pass ---- */
+  @media (max-width:640px){
+    .hero-inner{padding-bottom:clamp(40px,10vh,74px)}
+    .hero .eyebrow{font-size:.6rem;letter-spacing:.1em}
+    .hero .sub{font-size:1.02rem;margin-top:22px;max-width:92%}
+    .manifesto{padding:clamp(84px,15vh,130px) 0}
+    .manifesto .big{font-size:clamp(2.1rem,8.6vw,3.1rem)}
+    .manifesto .note{margin-top:38px;font-size:1rem}
+    .scene.br,.scene.cc{justify-content:flex-start;text-align:left}
+    .scene.br .scene-body,.scene.cc .scene-body{margin:0}
+    .scene.br .txt,.scene.cc .txt,.scene.br .detail,.scene.cc .detail{margin-left:0;margin-right:0}
+    .scene-scrim{background:linear-gradient(0deg,rgba(6,6,4,.92),rgba(6,6,4,.45) 46%,rgba(6,6,4,.1) 74%,transparent) !important}
+    .scene-body{padding-bottom:clamp(52px,10vh,88px);max-width:100%}
+    .scene h2{font-size:clamp(2.5rem,12vw,3.6rem)}
+    .scene .txt{font-size:1.03rem;max-width:100%}
+    .route{padding:clamp(70px,11vh,120px) 0}
+    .route .nm{font-size:27px}.route .tag{font-size:14.5px}.route .side{font-size:13px}.route .compass{font-size:15px}
+    .facts{padding:clamp(64px,10vh,96px) 0}
+    .fact{padding:24px 0}
+    .gallery{padding:clamp(64px,10vh,96px) 0}
+    .nav{padding:16px 22px}
+    .nav .brand{font-size:1.5rem}
+    .nav .links a{font-size:1.2rem;letter-spacing:.06em;opacity:1}
+    .marquee span{font-size:1.5rem}
   }
   @media (hover:none){.cursor,.cursor-dot{display:none}}
 
@@ -299,7 +346,8 @@
   <div class="wrap"><div class="scene-body">
     <p class="meta mono reveal">01 — Дюны · 62 метра</p>
     <h2 class="reveal">Высота Эфа</h2>
-    <p class="txt reveal">Самая высокая кочующая дюна Европы названа в честь Франца Эфа — человека, который остановил движущиеся пески соснами и травой. С деревянных настилов видно сразу и море, и залив.</p>
+    <p class="txt reveal">Дюна Ореховая поднимается на 55 метров, а её гребень — Высоту Эфа — почти на 62. Названа в честь Франца Эфа, лесовода, который на рубеже XIX–XX веков укротил ползущие пески, засадив склоны горной сосной. Дюны и сейчас смещаются на несколько метров в год — под ними погребены целые старые посёлки. С деревянных настилов открываются разом и открытое море, и тихий залив.</p>
+    <p class="detail mono reveal">Смещение песка · до нескольких метров в год</p>
   </div></div>
 </section>
 
@@ -309,7 +357,8 @@
   <div class="wrap"><div class="scene-body">
     <p class="meta mono reveal">02 — Лес</p>
     <h2 class="reveal">Танцующий лес</h2>
-    <p class="txt reveal">Сосны, свернувшиеся в кольца и спирали, будто застыли посреди движения. Единой разгадки их танца нет до сих пор — и в этом половина магии.</p>
+    <p class="txt reveal">Этот сосновый участок высадили в 1960-х, чтобы закрепить пески. Но деревья выросли скрученными в кольца, петли и спирали — единой разгадки нет до сих пор. Винят и гусениц побеговьюна, и постоянный ветер, и подвижность почвы под корнями. Местные верят: пройдёшь сквозь кольцо ствола — прибавишь год жизни, поэтому самые хрупкие деревья теперь огорожены.</p>
+    <p class="detail mono reveal">Высажен · 1960-е · загадка без ответа</p>
   </div></div>
 </section>
 
@@ -319,7 +368,8 @@
   <div class="wrap"><div class="scene-body">
     <p class="meta mono reveal">03 — Небо · 10 000 000</p>
     <h2 class="reveal">Птичий мост</h2>
-    <p class="txt reveal">Дважды в год над узкой полосой суши проходят до десяти миллионов птиц. Станция «Фрингилла» считает и кольцует их с 1901 года — одна из первых в мире.</p>
+    <p class="txt reveal">Коса лежит на Беломоро-Балтийском пролётном пути — узком воздушном коридоре, которым дважды в год идут до десяти миллионов птиц. В 1901 году в Росситтене орнитолог Иоганнес Тинеман основал здесь одну из первых в мире станций кольцевания — «Фрингиллу». Гигантские ловушки-воронки высотой с пятиэтажный дом ловят птиц живыми: их считают, кольцуют и отпускают дальше на юг.</p>
+    <p class="detail mono reveal">Станция «Фрингилла» · с 1901 года</p>
   </div></div>
 </section>
 
@@ -329,10 +379,72 @@
   <div class="wrap"><div class="scene-body">
     <p class="meta mono reveal">04 — Вода</p>
     <h2 class="reveal">Два берега</h2>
-    <p class="txt reveal">С одной стороны — открытая Балтика с её штормами и янтарём. С другой, в паре сотен метров, — тихий пресный залив, тростник и рыбацкие лодки. Коса живёт между двумя водами.</p>
+    <p class="txt reveal">Ширина косы колеблется от 400 метров до четырёх километров — и всё это граница двух стихий. С запада бьёт открытая Балтика и после штормов выносит на песок янтарь. С востока, в паре сотен метров, стынет пресный Куршский залив с тростником и рыбацкими лодками. Между водами живут три посёлка — Лесной, Рыбачий и Морское, где до сих пор коптят рыбу по старым рецептам.</p>
+    <p class="detail mono reveal">Ширина косы · от 400 м до 4 км</p>
   </div></div>
 </section>
 </div>
+
+<!-- ROUTE MAP -->
+<section class="route" id="route">
+  <div class="wrap">
+    <div class="head">
+      <span class="mono reveal">Маршрут · 48 км с юга на север</span>
+      <h2 class="reveal">Вся коса — одной дорогой</h2>
+    </div>
+    <div class="map">
+      <svg viewBox="0 0 440 980" role="img" aria-label="Схема Куршской косы: маршрут с юга на север с остановками">
+        <title>Маршрут по Куршской косе</title>
+        <rect x="0" y="0" width="220" height="980" fill="rgba(90,115,112,.06)"></rect>
+        <rect x="220" y="0" width="220" height="980" fill="rgba(199,164,105,.06)"></rect>
+        <text class="side" x="16" y="30" text-anchor="start">← Балтийское море</text>
+        <text class="side" x="424" y="30" text-anchor="end">Куршский залив →</text>
+        <text class="compass" x="150" y="60" text-anchor="middle">СЕВЕР ↑</text>
+        <text class="compass" x="150" y="958" text-anchor="middle">↓ ЮГ</text>
+        <path class="road-bg" d="M150,910 C120,860 95,815 110,750 C125,690 175,655 165,585 C158,520 95,485 110,420 C125,355 180,320 170,255 C163,200 120,150 135,95"></path>
+        <path class="road" id="spitRoad" d="M150,910 C120,860 95,815 110,750 C125,690 175,655 165,585 C158,520 95,485 110,420 C125,355 180,320 170,255 C163,200 120,150 135,95"></path>
+        <g class="stop">
+          <line class="conn" x1="159" y1="910" x2="205" y2="910"></line>
+          <circle class="dot" cx="150" cy="910" r="7"></circle>
+          <text class="nm" x="215" y="905">Зеленоградск</text>
+          <text class="tag" x="216" y="927">0 км · въезд на косу</text>
+        </g>
+        <g class="stop">
+          <line class="conn" x1="119" y1="750" x2="205" y2="750"></line>
+          <circle class="dot" cx="110" cy="750" r="7"></circle>
+          <text class="nm" x="215" y="745">Лесной</text>
+          <text class="tag" x="216" y="767">11 км · первый посёлок</text>
+        </g>
+        <g class="stop">
+          <line class="conn" x1="174" y1="585" x2="205" y2="585"></line>
+          <circle class="dot" cx="165" cy="585" r="7"></circle>
+          <text class="nm" x="215" y="580">Королевский бор</text>
+          <text class="tag" x="216" y="602">20 км · реликтовый лес</text>
+        </g>
+        <g class="stop">
+          <line class="conn" x1="119" y1="420" x2="205" y2="420"></line>
+          <circle class="dot" cx="110" cy="420" r="7"></circle>
+          <text class="nm" x="215" y="415">Фрингилла</text>
+          <text class="tag" x="216" y="437">32 км · кольцевание птиц</text>
+        </g>
+        <g class="stop">
+          <line class="conn" x1="179" y1="255" x2="205" y2="255"></line>
+          <circle class="ring" cx="170" cy="255" r="13"></circle>
+          <circle class="dot-key" cx="170" cy="255" r="7.5"></circle>
+          <text class="nm" x="215" y="250">Высота Эфа</text>
+          <text class="tag" x="216" y="272">42 км · дюна и смотровая</text>
+        </g>
+        <g class="stop">
+          <line class="conn" x1="144" y1="95" x2="205" y2="95"></line>
+          <circle class="dot" cx="135" cy="95" r="7"></circle>
+          <text class="nm" x="215" y="90">Морское</text>
+          <text class="tag" x="216" y="112">48 км · рыбацкий край</text>
+        </g>
+      </svg>
+    </div>
+    <p class="mapnote">Схема условная · расстояния не в масштабе</p>
+  </div>
+</section>
 
 <!-- FACTS -->
 <section class="facts">
@@ -539,6 +651,13 @@
     gsap.utils.toArray('.fact .n').forEach(function(el){
       ScrollTrigger.create({trigger:el,start:'top 85%',once:true,onEnter:function(){countUp(el);}});
     });
+    var road = document.getElementById('spitRoad');
+    if(road){
+      var rlen = road.getTotalLength();
+      gsap.set(road,{strokeDasharray:rlen,strokeDashoffset:rlen});
+      gsap.to(road,{strokeDashoffset:0,ease:'none',scrollTrigger:{trigger:'.route .map',start:'top 80%',end:'bottom 70%',scrub:.6}});
+      gsap.from('.route .stop',{opacity:0,x:-16,duration:.7,stagger:.12,ease:'power2.out',scrollTrigger:{trigger:'.route .map',start:'top 70%'}});
+    }
     ScrollTrigger.refresh();
   } else {
     /* fallback: reveal + counts via IntersectionObserver */
