@@ -171,24 +171,55 @@
   .scene.br .detail{margin-left:auto}
   .scene.cc .detail{margin-left:auto;margin-right:auto}
 
-  /* ---------- route map (illustrated) ---------- */
-  .route{background:var(--night);color:var(--cream);padding:clamp(80px,13vh,160px) 0;overflow:hidden}
-  .route .head{text-align:center;margin-bottom:clamp(36px,5vh,60px)}
-  .route .head .mono{color:var(--sand);display:block;margin-bottom:18px}
-  .route .head h2{font-size:clamp(2rem,5vw,3.6rem)}
-  .route .map{max-width:540px;margin:0 auto}
-  .route svg{width:100%;height:auto;display:block;overflow:visible}
-  .route .road-bg{fill:none;stroke:rgba(236,229,215,.12);stroke-width:2.4;stroke-linecap:round}
-  .route .road{fill:none;stroke:#EFEADD;stroke-width:2.6;stroke-linecap:round}
-  .route .conn{stroke:rgba(236,229,215,.3);stroke-width:1}
-  .route .dot{fill:var(--night);stroke:#EFEADD;stroke-width:2.2}
-  .route .dot-key{fill:var(--amber);stroke:#F3EEE1;stroke-width:2}
-  .route .ring{fill:none;stroke:var(--amber);stroke-width:1;opacity:.55}
-  .route .nm{fill:#F3EEE1;font-family:var(--f-disp);font-weight:700;font-size:23px}
-  .route .tag{fill:var(--fog);font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
-  .route .side{fill:rgba(236,229,215,.36);font-family:var(--f-mono);font-size:12px;letter-spacing:.24em;text-transform:uppercase}
-  .route .compass{fill:var(--sand);font-family:var(--f-mono);font-size:13px;letter-spacing:.2em}
-  .route .mapnote{text-align:center;color:var(--fog);font-family:var(--f-mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;margin-top:clamp(26px,4vh,42px)}
+  /* ---------- route: pinned journey ---------- */
+  .route{background:var(--night);color:var(--cream);min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:clamp(70px,10vh,110px) 0;overflow:hidden}
+  .route .rt-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:clamp(26px,4vh,46px)}
+  .route .rt-head h2{font-size:clamp(1.9rem,4.2vw,3.1rem)}
+  .route .rt-head .mono{color:var(--sand)}
+  .route .rt-stage{display:grid;grid-template-columns:minmax(230px,.82fr) 1.18fr;gap:clamp(24px,4.5vw,68px);align-items:center}
+  .route .rt-map{position:relative}
+  .route .rt-map svg{width:100%;height:auto;display:block;overflow:visible;max-height:62svh}
+  .rt-hair{stroke:rgba(236,229,215,.07);stroke-width:1}
+  .rt-elev-fill{fill:rgba(199,164,105,.09)}
+  .rt-elev{fill:none;stroke:rgba(199,164,105,.5);stroke-width:1.4}
+  .rt-elev-base{stroke:rgba(236,229,215,.14);stroke-width:1}
+  .rt-road-bg{fill:none;stroke:rgba(236,229,215,.14);stroke-width:2.4;stroke-linecap:round}
+  .rt-road{fill:none;stroke:#F2EDE1;stroke-width:2.6;stroke-linecap:round;filter:drop-shadow(0 0 6px rgba(242,237,225,.35))}
+  .rt-stop{fill:var(--night);stroke:rgba(236,229,215,.4);stroke-width:2;transition:fill .5s var(--ease),stroke .5s var(--ease),filter .5s var(--ease)}
+  .rt-stop.lit{stroke:#F2EDE1}
+  .rt-stop.now{fill:var(--amber-lt);stroke:#fff;filter:drop-shadow(0 0 8px var(--amber-lt)) drop-shadow(0 0 18px rgba(215,154,68,.6))}
+  .rt-ring{fill:none;stroke:var(--amber);stroke-width:1;opacity:0;transition:opacity .5s var(--ease)}
+  .rt-stop.now + .rt-ring,.rt-ring.now{opacity:.6}
+  .rt-dot{fill:#fff;filter:drop-shadow(0 0 5px #fff) drop-shadow(0 0 14px var(--amber-lt))}
+  .rt-km{fill:rgba(236,229,215,.42);font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;transition:fill .5s var(--ease)}
+  .rt-km.now{fill:var(--amber-lt)}
+  .rt-cap{fill:var(--sand);font-family:var(--f-mono);font-size:11px;letter-spacing:.2em}
+  .rt-axis{fill:rgba(236,229,215,.3);font-family:var(--f-mono);font-size:10px;letter-spacing:.16em}
+  .route .rt-cards{display:grid;position:relative}
+  .rt-card{grid-area:1/1;opacity:0;transform:translateY(26px) scale(.985);transition:opacity .7s var(--ease),transform .7s var(--ease);pointer-events:none}
+  .rt-card.on{opacity:1;transform:none;pointer-events:auto}
+  .rt-media{position:relative;aspect-ratio:16/10;border-radius:18px;overflow:hidden;box-shadow:0 40px 80px -40px rgba(0,0,0,.8),inset 0 0 0 1px rgba(255,255,255,.07)}
+  .rt-media img{width:100%;height:100%;object-fit:cover}
+  .rt-media::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(8,7,4,.5),transparent 55%)}
+  .rt-num{position:absolute;left:18px;bottom:14px;z-index:2;font-family:var(--f-mono);font-size:.64rem;letter-spacing:.2em;color:rgba(255,255,255,.75)}
+  .rt-body{padding-top:clamp(18px,2.4vh,28px)}
+  .rt-meta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+  .rt-badge{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.14em;color:var(--night);background:var(--amber-lt);padding:5px 12px;border-radius:100px;font-weight:700}
+  .rt-meta .rt-time{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fog)}
+  .rt-card h3{font-size:clamp(1.8rem,3.4vw,2.9rem);color:#F6EFE0}
+  .rt-card p{margin:14px 0 0;color:var(--cream-dim);font-size:clamp(.98rem,1.25vw,1.1rem);max-width:44ch}
+  .rt-foot{display:flex;gap:20px;flex-wrap:wrap;margin-top:20px;padding-top:16px;border-top:1px solid rgba(236,229,215,.12);font-family:var(--f-mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fog)}
+  .rt-foot b{color:var(--sand);font-weight:500}
+  .route .rt-note{margin-top:clamp(22px,3vh,36px);color:var(--fog);font-family:var(--f-mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;text-align:center}
+  /* static fallback / mobile timeline */
+  .rt-static{min-height:0;display:block}
+  .rt-static .rt-stage{grid-template-columns:1fr;gap:0}
+  .rt-static .rt-map{display:none}
+  .rt-static .rt-cards{display:block;padding-left:32px}
+  .rt-static .rt-cards::before{content:"";position:absolute;left:8px;top:10px;bottom:10px;width:1px;background:rgba(236,229,215,.18)}
+  .rt-static .rt-card{opacity:1;transform:none;pointer-events:auto;position:relative;margin-bottom:clamp(38px,6vh,64px)}
+  .rt-static .rt-card:last-child{margin-bottom:0}
+  .rt-static .rt-card::before{content:"";position:absolute;left:-29px;top:12px;width:11px;height:11px;border-radius:50%;background:var(--night);border:2px solid var(--amber-lt);box-shadow:0 0 10px rgba(215,154,68,.5)}
 
   /* ---------- facts ---------- */
   .facts{background:var(--paper);color:var(--ink);padding:clamp(90px,14vh,170px) 0}
@@ -265,6 +296,14 @@
     .thread{display:none}.topbar{display:block}
     .facts-grid{grid-template-columns:repeat(2,1fr)}
     .foot-grid{grid-template-columns:1fr 1fr}
+    .route{min-height:0;display:block}
+    .route .rt-stage{grid-template-columns:1fr;gap:0}
+    .route .rt-map{display:none}
+    .route .rt-cards{display:block;padding-left:32px}
+    .route .rt-cards::before{content:"";position:absolute;left:8px;top:10px;bottom:10px;width:1px;background:rgba(236,229,215,.18)}
+    .route .rt-card{opacity:1;transform:none;pointer-events:auto;position:relative;margin-bottom:clamp(38px,6vh,64px)}
+    .route .rt-card:last-child{margin-bottom:0}
+    .route .rt-card::before{content:"";position:absolute;left:-29px;top:12px;width:11px;height:11px;border-radius:50%;background:var(--night);border:2px solid var(--amber-lt);box-shadow:0 0 10px rgba(215,154,68,.5)}
     .frame:nth-child(2){transform:translateY(-22px)}
     .frame:nth-child(3){transform:translateY(12px)}
     .frame:nth-child(4){transform:translateY(-30px)}
@@ -302,7 +341,9 @@
     .scene h2{font-size:clamp(2.5rem,12vw,3.6rem)}
     .scene .txt{font-size:1.03rem;max-width:100%}
     .route{padding:clamp(70px,11vh,120px) 0}
-    .route .nm{font-size:27px}.route .tag{font-size:14.5px}.route .side{font-size:13px}.route .compass{font-size:15px}
+    .rt-card h3{font-size:clamp(1.9rem,8vw,2.5rem)}
+    .rt-card p{font-size:1.02rem;max-width:100%}
+    .route .rt-head{margin-bottom:34px}
     .facts{padding:clamp(64px,10vh,96px) 0}
     .fact{padding:24px 0}
     .gallery{padding:clamp(64px,10vh,96px) 0}
@@ -463,64 +504,140 @@
 </section>
 </div>
 
-<!-- ROUTE MAP -->
+<!-- ROUTE — pinned journey -->
 <section class="route" id="route" data-place="Маршрут" data-sub="вся коса">
   <div class="wrap">
-    <div class="head">
-      <span class="mono reveal">Маршрут · 48 км с юга на север</span>
+    <div class="rt-head">
       <h2 class="reveal">Вся коса — одной дорогой</h2>
+      <span class="mono reveal">44 км · 7 остановок · с юга на север</span>
     </div>
-    <div class="map">
-      <svg viewBox="0 0 440 980" role="img" aria-label="Схема Куршской косы: маршрут с юга на север с остановками">
-        <title>Маршрут по Куршской косе</title>
-        <rect x="0" y="0" width="220" height="980" fill="rgba(90,115,112,.06)"></rect>
-        <rect x="220" y="0" width="220" height="980" fill="rgba(199,164,105,.06)"></rect>
-        <text class="side" x="16" y="30" text-anchor="start">← Балтийское море</text>
-        <text class="side" x="424" y="30" text-anchor="end">Куршский залив →</text>
-        <text class="compass" x="150" y="60" text-anchor="middle">ЮГ · СТАРТ</text>
-        <text class="compass" x="150" y="958" text-anchor="middle">ФИНИШ · СЕВЕР</text>
-        <path class="road-bg" d="M150,70 C120,120 95,165 110,230 C125,290 175,325 165,395 C158,460 95,495 110,560 C125,625 180,660 170,725 C163,780 120,830 135,885"></path>
-        <path class="road" id="spitRoad" d="M150,70 C120,120 95,165 110,230 C125,290 175,325 165,395 C158,460 95,495 110,560 C125,625 180,660 170,725 C163,780 120,830 135,885"></path>
-        <g class="stop">
-          <line class="conn" x1="159" y1="70" x2="205" y2="70"></line>
-          <circle class="dot" cx="150" cy="70" r="7"></circle>
-          <text class="nm" x="215" y="65">Зеленоградск</text>
-          <text class="tag" x="216" y="87">0 км · въезд на косу</text>
-        </g>
-        <g class="stop">
-          <line class="conn" x1="119" y1="230" x2="205" y2="230"></line>
-          <circle class="dot" cx="110" cy="230" r="7"></circle>
-          <text class="nm" x="215" y="225">Лесной</text>
-          <text class="tag" x="216" y="247">11 км · первый посёлок</text>
-        </g>
-        <g class="stop">
-          <line class="conn" x1="174" y1="395" x2="205" y2="395"></line>
-          <circle class="dot" cx="165" cy="395" r="7"></circle>
-          <text class="nm" x="215" y="390">Королевский бор</text>
-          <text class="tag" x="216" y="412">20 км · реликтовый лес</text>
-        </g>
-        <g class="stop">
-          <line class="conn" x1="119" y1="560" x2="205" y2="560"></line>
-          <circle class="dot" cx="110" cy="560" r="7"></circle>
-          <text class="nm" x="215" y="555">Фрингилла</text>
-          <text class="tag" x="216" y="577">32 км · кольцевание птиц</text>
-        </g>
-        <g class="stop">
-          <line class="conn" x1="179" y1="725" x2="205" y2="725"></line>
-          <circle class="ring" cx="170" cy="725" r="13"></circle>
-          <circle class="dot-key" cx="170" cy="725" r="7.5"></circle>
-          <text class="nm" x="215" y="720">Высота Эфа</text>
-          <text class="tag" x="216" y="742">42 км · дюна и смотровая</text>
-        </g>
-        <g class="stop">
-          <line class="conn" x1="144" y1="885" x2="205" y2="885"></line>
-          <circle class="dot" cx="135" cy="885" r="7"></circle>
-          <text class="nm" x="215" y="880">Морское</text>
-          <text class="tag" x="216" y="902">48 км · рыбацкий край</text>
-        </g>
-      </svg>
+
+    <div class="rt-stage">
+      <div class="rt-map">
+        <svg viewBox="0 0 240 900" role="img" aria-label="Схема маршрута по Куршской косе с профилем высот">
+          <title>Маршрут и профиль высот Куршской косы</title>
+          <line class="rt-hair" x1="20" y1="50" x2="230" y2="50"></line>
+          <line class="rt-hair" x1="20" y1="185" x2="230" y2="185"></line>
+          <line class="rt-hair" x1="20" y1="320" x2="230" y2="320"></line>
+          <line class="rt-hair" x1="20" y1="455" x2="230" y2="455"></line>
+          <line class="rt-hair" x1="20" y1="590" x2="230" y2="590"></line>
+          <line class="rt-hair" x1="20" y1="725" x2="230" y2="725"></line>
+          <line class="rt-hair" x1="20" y1="860" x2="230" y2="860"></line>
+
+          <text class="rt-axis" x="26" y="26">ПРОФИЛЬ ВЫСОТ</text>
+          <line class="rt-elev-base" x1="26" y1="40" x2="26" y2="870"></line>
+          <path class="rt-elev-fill" d="M26,50 L30,50 C32,110 33,150 35,185 C37,230 38,280 39,320 C38,370 37,410 36,455 C38,500 41,545 43,590 C55,635 72,680 80,725 C70,770 50,815 43,860 L26,860 Z"></path>
+          <path class="rt-elev" d="M30,50 C32,110 33,150 35,185 C37,230 38,280 39,320 C38,370 37,410 36,455 C38,500 41,545 43,590 C55,635 72,680 80,725 C70,770 50,815 43,860"></path>
+          <text class="rt-axis" x="88" y="722">62 М</text>
+
+          <text class="rt-cap" x="152" y="26" text-anchor="middle">СТАРТ</text>
+          <text class="rt-cap" x="150" y="888" text-anchor="middle">ФИНИШ</text>
+
+          <path class="rt-road-bg" d="M152,50 C142,95 124,140 128,185 C132,230 170,275 165,320 C160,365 122,410 127,455 C132,500 166,545 160,590 C154,635 122,680 130,725 C138,770 156,815 150,860"></path>
+          <path class="rt-road" id="rtRoad" d="M152,50 C142,95 124,140 128,185 C132,230 170,275 165,320 C160,365 122,410 127,455 C132,500 166,545 160,590 C154,635 122,680 130,725 C138,770 156,815 150,860"></path>
+
+          <circle class="rt-ring" cx="152" cy="50" r="13"></circle>
+          <circle class="rt-ring" cx="128" cy="185" r="13"></circle>
+          <circle class="rt-ring" cx="165" cy="320" r="13"></circle>
+          <circle class="rt-ring" cx="127" cy="455" r="13"></circle>
+          <circle class="rt-ring" cx="160" cy="590" r="13"></circle>
+          <circle class="rt-ring" cx="130" cy="725" r="13"></circle>
+          <circle class="rt-ring" cx="150" cy="860" r="13"></circle>
+
+          <circle class="rt-stop" cx="152" cy="50" r="6"></circle>
+          <circle class="rt-stop" cx="128" cy="185" r="6"></circle>
+          <circle class="rt-stop" cx="165" cy="320" r="6"></circle>
+          <circle class="rt-stop" cx="127" cy="455" r="6"></circle>
+          <circle class="rt-stop" cx="160" cy="590" r="6"></circle>
+          <circle class="rt-stop" cx="130" cy="725" r="7.5"></circle>
+          <circle class="rt-stop" cx="150" cy="860" r="6"></circle>
+
+          <text class="rt-km" x="190" y="54">0 км</text>
+          <text class="rt-km" x="190" y="189">6 км</text>
+          <text class="rt-km" x="190" y="324">11 км</text>
+          <text class="rt-km" x="190" y="459">23 км</text>
+          <text class="rt-km" x="190" y="594">37 км</text>
+          <text class="rt-km" x="190" y="729">42 км</text>
+          <text class="rt-km" x="190" y="864">44 км</text>
+
+          <circle class="rt-dot" id="rtDot" cx="152" cy="50" r="4.5"></circle>
+        </svg>
+      </div>
+
+      <div class="rt-cards">
+        <article class="rt-card on">
+          <div class="rt-media"><img class="grade" src="photos/beach.jpg" loading="lazy" alt="Балтийский пляж с дюнной травой у въезда на косу"><span class="rt-num">Остановка 01 / 07</span></div>
+          <div class="rt-body">
+            <div class="rt-meta"><span class="rt-badge">0 км</span><span class="rt-time">начало пути</span></div>
+            <h3>Зеленоградск</h3>
+            <p>Курортный город, где заканчивается материк и начинается песчаная нить. Здесь же КПП национального парка — дальше коса живёт по своим правилам.</p>
+            <div class="rt-foot"><span>54.96° N · 20.48° E</span><span><b>Вход:</b> эко-сбор парка</span></div>
+          </div>
+        </article>
+
+        <article class="rt-card">
+          <div class="rt-media"><img class="grade" src="photos/cine-pine.jpg" loading="lazy" alt="Туманный реликтовый лес Королевского бора"><span class="rt-num">Остановка 02 / 07</span></div>
+          <div class="rt-body">
+            <div class="rt-meta"><span class="rt-badge">6 км</span><span class="rt-time">10 минут в пути</span></div>
+            <h3>Королевский бор</h3>
+            <p>Единственный участок косы, где древние деревья устояли перед песком. Вековые туи и ели, а рядом — старая почтовая дорога, по которой возили королевскую почту.</p>
+            <div class="rt-foot"><span>55.00° N · 20.55° E</span><span><b>Экотропа:</b> 2,9 км</span></div>
+          </div>
+        </article>
+
+        <article class="rt-card">
+          <div class="rt-media"><img class="grade" src="photos/aerial.jpg" loading="lazy" alt="Посёлок Лесной с высоты: узкая полоса между морем и заливом"><span class="rt-num">Остановка 03 / 07</span></div>
+          <div class="rt-body">
+            <div class="rt-meta"><span class="rt-badge">11 км</span><span class="rt-time">15 минут в пути</span></div>
+            <h3>Лесной</h3>
+            <p>Самое узкое место косы: от моря до залива всего 400 метров. Обе воды видно с одной точки — слева штормовая Балтика, справа зеркальный залив.</p>
+            <div class="rt-foot"><span>55.03° N · 20.59° E</span><span><b>Ширина:</b> 400 м</span></div>
+          </div>
+        </article>
+
+        <article class="rt-card">
+          <div class="rt-media"><img class="grade" src="photos/cine-birds.jpg" loading="lazy" alt="Стая птиц над тростником на закате"><span class="rt-num">Остановка 04 / 07</span></div>
+          <div class="rt-body">
+            <div class="rt-meta"><span class="rt-badge">23 км</span><span class="rt-time">30 минут в пути</span></div>
+            <h3>Фрингилла</h3>
+            <p>Старейшая в мире станция кольцевания птиц, работающая с 1901 года. Ловушки-воронки высотой с пятиэтажный дом ловят птиц живыми: их считают, кольцуют и отпускают дальше.</p>
+            <div class="rt-foot"><span>55.15° N · 20.75° E</span><span><b>Сезон:</b> апрель — октябрь</span></div>
+          </div>
+        </article>
+
+        <article class="rt-card">
+          <div class="rt-media"><img class="grade" src="photos/dancing-forest.jpg" loading="lazy" alt="Сосны Танцующего леса, свёрнутые в кольца"><span class="rt-num">Остановка 05 / 07</span></div>
+          <div class="rt-body">
+            <div class="rt-meta"><span class="rt-badge">37 км</span><span class="rt-time">45 минут в пути</span></div>
+            <h3>Танцующий лес</h3>
+            <p>Сосны, скрученные в кольца и спирали, высадили в 1960-х, чтобы удержать пески. Почему они выросли такими — единой разгадки нет до сих пор.</p>
+            <div class="rt-foot"><span>55.24° N · 20.87° E</span><span><b>Тропа:</b> 0,8 км</span></div>
+          </div>
+        </article>
+
+        <article class="rt-card">
+          <div class="rt-media"><img class="grade" src="photos/efa.jpg" loading="lazy" alt="Дюна Эфа с высоты"><span class="rt-num">Остановка 06 / 07</span></div>
+          <div class="rt-body">
+            <div class="rt-meta"><span class="rt-badge">42 км</span><span class="rt-time">50 минут в пути</span></div>
+            <h3>Высота Эфа</h3>
+            <p>Высшая точка маршрута — 62 метра над морем. С деревянных настилов видно разом открытую Балтику, залив и черепичные крыши Морского.</p>
+            <div class="rt-foot"><span>55.27° N · 20.92° E</span><span><b>Высота:</b> 62 м</span></div>
+          </div>
+        </article>
+
+        <article class="rt-card">
+          <div class="rt-media"><img class="grade" src="photos/panorama.jpg" loading="lazy" alt="Панорама дюн, залива и посёлка Морское"><span class="rt-num">Остановка 07 / 07</span></div>
+          <div class="rt-body">
+            <div class="rt-meta"><span class="rt-badge">44 км</span><span class="rt-time">55 минут в пути</span></div>
+            <h3>Морское</h3>
+            <p>Последний посёлок перед литовской границей. Рыбацкий край, где до сих пор коптят рыбу по старым рецептам, а дюна подходит к домам вплотную.</p>
+            <div class="rt-foot"><span>55.29° N · 20.94° E</span><span><b>Дальше:</b> граница</span></div>
+          </div>
+        </article>
+      </div>
     </div>
-    <p class="mapnote">Схема условная · расстояния не в масштабе</p>
+
+    <p class="rt-note">Схема условная · расстояния не в масштабе</p>
   </div>
 </section>
 
@@ -753,12 +870,51 @@
     gsap.utils.toArray('.fact .n').forEach(function(el){
       ScrollTrigger.create({trigger:el,start:'top 85%',once:true,onEnter:function(){countUp(el);}});
     });
-    var road = document.getElementById('spitRoad');
-    if(road){
-      var rlen = road.getTotalLength();
-      gsap.set(road,{strokeDasharray:rlen,strokeDashoffset:rlen});
-      gsap.to(road,{strokeDashoffset:0,ease:'none',scrollTrigger:{trigger:'.route .map',start:'top 80%',end:'bottom 70%',scrub:.6}});
-      gsap.from('.route .stop',{opacity:0,x:-16,duration:.7,stagger:.12,ease:'power2.out',scrollTrigger:{trigger:'.route .map',start:'top 70%'}});
+    /* route — pinned journey down the spit */
+    var rtSec = document.querySelector('.route'),
+        rtRoad = document.getElementById('rtRoad'),
+        rtDot = document.getElementById('rtDot'),
+        rtCards = gsap.utils.toArray('.rt-card'),
+        rtStops = gsap.utils.toArray('.rt-stop'),
+        rtRings = gsap.utils.toArray('.rt-ring'),
+        rtKms = gsap.utils.toArray('.rt-km'),
+        stopT = [0, 1/6, 2/6, 0.5, 4/6, 5/6, 1];
+
+    function rtSet(p){
+      p = Math.max(0, Math.min(1, p));
+      var L = rtRoad.getTotalLength(), i;
+      rtRoad.style.strokeDashoffset = L*(1-p);
+      var pt = rtRoad.getPointAtLength(L*p);
+      rtDot.setAttribute('cx', pt.x);
+      rtDot.setAttribute('cy', pt.y);
+      var idx = 0;
+      for(i=0;i<stopT.length;i++){ if(p >= stopT[i]-0.04) idx = i; }
+      for(i=0;i<rtStops.length;i++){
+        rtStops[i].classList.toggle('lit', p >= stopT[i]-0.04);
+        rtStops[i].classList.toggle('now', i === idx);
+        if(rtRings[i]) rtRings[i].classList.toggle('now', i === idx);
+        if(rtKms[i]) rtKms[i].classList.toggle('now', i === idx);
+        if(rtCards[i]) rtCards[i].classList.toggle('on', i === idx);
+      }
+    }
+
+    if(rtRoad && rtDot && window.innerWidth > 900){
+      var RL = rtRoad.getTotalLength();
+      rtRoad.style.strokeDasharray = RL;
+      rtRoad.style.strokeDashoffset = RL;
+      ScrollTrigger.create({
+        trigger: rtSec,
+        start: 'top top',
+        end: function(){ return '+=' + Math.round(window.innerHeight * 4.2); },
+        pin: true,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        onUpdate: function(self){ rtSet(self.progress); },
+        onRefresh: function(self){ rtSet(self.progress); }
+      });
+      rtSet(0);
+    } else if(rtSec){
+      rtSec.classList.add('rt-static');
     }
 
     /* mini 3D route panel — scroll-driven dot + progressive road + lit stops */
@@ -790,6 +946,8 @@
   } else {
     /* fallback: reveal + counts via IntersectionObserver */
     html.classList.add('no-fx');
+    var rtSecFb = document.querySelector('.route');
+    if(rtSecFb) rtSecFb.classList.add('rt-static');
     if('IntersectionObserver' in window){
       var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('is-in');io.unobserve(en.target);}});},{threshold:.12});
       document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
