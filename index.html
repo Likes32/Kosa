@@ -240,35 +240,40 @@
   .fact .n .u{font-size:.34em;font-family:var(--f-mono);font-weight:500;color:var(--amber);margin-left:.35em;letter-spacing:.05em}
   .fact .c{margin-top:14px;color:#6a6153;font-size:.95rem;max-width:20ch}
 
-  /* ---------- gallery: stepped film reel ---------- */
-  .gallery{background:var(--night);padding:clamp(80px,12vh,150px) 0}
-  .gallery .head{color:var(--cream);margin-bottom:20px;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px}
-  .gallery .head h2{font-size:clamp(1.9rem,4.4vw,3.2rem)}
-  .gallery .head .mono{color:var(--sand)}
-  .reel-wrap{position:relative}
-  .reel-wrap::after{content:"";position:absolute;top:0;right:0;bottom:0;width:min(120px,12vw);pointer-events:none;
-    background:linear-gradient(270deg,var(--night),transparent);z-index:2}
-  .reel{display:flex;align-items:flex-end;gap:clamp(20px,2.6vw,36px);overflow-x:auto;overflow-y:visible;
-    padding:34px clamp(22px,5vw,64px) 30px;margin:0 calc(-1 * clamp(22px,5vw,64px));
-    scroll-snap-type:x proximity;scrollbar-width:none;-ms-overflow-style:none}
-  .reel::-webkit-scrollbar{display:none}
-  .frame{flex:0 0 auto;width:clamp(200px,23vw,280px);scroll-snap-align:start}
-  .frame:nth-child(2){transform:translateY(-38px)}
-  .frame:nth-child(3){transform:translateY(20px)}
-  .frame:nth-child(4){transform:translateY(-56px)}
-  .frame:nth-child(5){transform:translateY(-6px)}
-  .frame:nth-child(6){transform:translateY(-48px)}
-  .frame:nth-child(7){transform:translateY(14px)}
-  .fr-media{position:relative;overflow:hidden;border-radius:3px;box-shadow:0 34px 60px -30px rgba(0,0,0,.65),inset 0 0 0 1px rgba(255,255,255,.06)}
-  .frame.tall .fr-media{aspect-ratio:4/5}
-  .frame.wide .fr-media{aspect-ratio:4/3}
-  .frame.wider .fr-media{aspect-ratio:16/11}
-  .fr-media img{width:100%;height:100%;object-fit:cover;transition:transform 1.3s var(--ease)}
-  .frame:hover .fr-media img{transform:scale(1.06)}
-  .fr-num{font-family:var(--f-mono);font-size:.62rem;letter-spacing:.22em;color:var(--amber-lt);margin:18px 0 7px}
-  .fr-name{font-family:var(--f-disp);font-weight:700;font-size:1.22rem;color:var(--cream);line-height:1.15}
-  .fr-desc{margin:7px 0 0;font-size:.87rem;color:var(--fog);line-height:1.55;max-width:26ch}
-  .reel-hint{margin-top:8px;text-align:right;color:var(--fog);font-size:.62rem;letter-spacing:.18em}
+  /* ---------- gallery: full-bleed cinematic rail ---------- */
+  .gallery{background:var(--night);padding:clamp(80px,12vh,150px) 0;overflow:hidden}
+  .gallery .g-head{color:var(--cream);display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:clamp(28px,4vh,48px)}
+  .gallery .g-head h2{font-size:clamp(1.9rem,4.4vw,3.2rem)}
+  .gallery .g-head .mono{color:var(--sand)}
+  .g-rail{width:100vw;margin-left:calc(50% - 50vw);overflow-x:auto;overflow-y:hidden;
+    scroll-snap-type:x mandatory;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;
+    scrollbar-width:none;-ms-overflow-style:none;cursor:grab;padding-bottom:6px}
+  .g-rail::-webkit-scrollbar{display:none}
+  .g-rail:focus-visible{outline:1px solid rgba(215,154,68,.7);outline-offset:-2px}
+  .g-rail.dragging{cursor:grabbing;scroll-snap-type:none;user-select:none}
+  .g-track{display:flex;gap:clamp(14px,1.7vw,26px);padding-inline:calc((100vw - min(74vw,1000px)) / 2)}
+  .g-slide{position:relative;flex:0 0 min(74vw,1000px);aspect-ratio:3/2;scroll-snap-align:center;
+    border-radius:20px;overflow:hidden;opacity:.34;transform:scale(.965);
+    transition:opacity .8s var(--ease),transform .8s var(--ease);
+    box-shadow:0 50px 90px -46px rgba(0,0,0,.85),inset 0 0 0 1px rgba(255,255,255,.07)}
+  .g-slide.is-active{opacity:1;transform:none}
+  .g-slide img{width:100%;height:100%;object-fit:cover}
+  .g-slide::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(6,6,4,.76),rgba(6,6,4,.12) 48%,transparent 66%)}
+  .g-cap{position:absolute;left:clamp(20px,3vw,44px);right:clamp(20px,3vw,44px);bottom:clamp(20px,3.4vh,38px);z-index:2;color:var(--cream)}
+  .g-cap .idx{font-family:var(--f-mono);font-size:.64rem;letter-spacing:.26em;color:var(--sand)}
+  .g-cap h3{margin-top:10px;font-size:clamp(1.5rem,3vw,2.7rem);color:#F6EFE0;text-shadow:0 6px 30px rgba(0,0,0,.55)}
+  .g-cap p{margin:9px 0 0;color:var(--cream-dim);font-size:clamp(.9rem,1.1vw,1.02rem);max-width:38ch}
+  .g-foot{display:flex;align-items:center;gap:clamp(14px,2vw,26px);margin-top:clamp(26px,3.6vh,44px)}
+  .g-bar{flex:1;height:1px;background:rgba(236,229,215,.16);position:relative}
+  .g-bar i{position:absolute;top:-1px;left:0;height:3px;width:14.28%;background:var(--amber-lt);
+    transition:left .5s var(--ease),width .5s var(--ease)}
+  .g-count{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.18em;color:var(--cream);white-space:nowrap}
+  .g-nav{display:flex;gap:8px}
+  .g-nav button{width:46px;height:46px;border-radius:50%;background:transparent;border:1px solid rgba(236,229,215,.26);
+    color:var(--cream);cursor:pointer;font-size:1.05rem;line-height:1;display:flex;align-items:center;justify-content:center;
+    transition:background .35s var(--ease),border-color .35s var(--ease),transform .35s var(--ease)}
+  .g-nav button:hover{background:rgba(236,229,215,.1);border-color:rgba(236,229,215,.6);transform:translateY(-2px)}
+  .g-nav button:disabled{opacity:.3;cursor:default;transform:none}
 
   /* ---------- closing ---------- */
   .closing{position:relative;min-height:100svh;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--cream)}
@@ -312,12 +317,8 @@
     .route .rt-card{opacity:1;transform:none;pointer-events:auto;position:relative;margin-bottom:clamp(38px,6vh,64px)}
     .route .rt-card:last-child{margin-bottom:0}
     .route .rt-card::before{content:"";position:absolute;left:-29px;top:12px;width:11px;height:11px;border-radius:50%;background:var(--night);border:2px solid var(--amber-lt);box-shadow:0 0 10px rgba(215,154,68,.5)}
-    .frame:nth-child(2){transform:translateY(-22px)}
-    .frame:nth-child(3){transform:translateY(12px)}
-    .frame:nth-child(4){transform:translateY(-30px)}
-    .frame:nth-child(5){transform:translateY(-4px)}
-    .frame:nth-child(6){transform:translateY(-26px)}
-    .frame:nth-child(7){transform:translateY(8px)}
+    .g-slide{flex:0 0 min(86vw,760px)}
+    .g-track{padding-inline:calc((100vw - min(86vw,760px)) / 2)}
   }
   @media (max-width:640px){
     .nav .links{position:fixed;inset:0 0 auto auto;top:0;height:100svh;width:min(78vw,320px);background:var(--night);flex-direction:column;justify-content:center;gap:28px;padding:40px;transform:translateX(100%);transition:transform .5s var(--ease);mix-blend-mode:normal}
@@ -329,9 +330,11 @@
     .nav.open .burger span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
     .foot-grid{grid-template-columns:1fr}
     .facts-grid{grid-template-columns:1fr}
-    .frame{width:min(72vw,260px)}
-    .frame:nth-child(n){transform:none}
-    .reel{padding-top:20px}
+    .g-slide{flex:0 0 88vw;aspect-ratio:4/5;opacity:.5}
+    .g-track{padding-inline:6vw;gap:12px}
+    .g-cap h3{font-size:1.55rem}
+    .g-cap p{font-size:.92rem}
+    .g-nav button{width:42px;height:42px}
   }
   /* ---- mobile premium pass ---- */
   @media (max-width:640px){
@@ -602,7 +605,7 @@
 
       <div class="rt-cards">
         <article class="rt-card on">
-          <div class="rt-media"><img class="grade" src="photos/beach.jpg" loading="lazy" alt="Балтийский пляж с дюнной травой у въезда на косу"><span class="rt-num">Остановка 01 / 07</span></div>
+          <div class="rt-media"><img class="grade" src="photos/dune-view.jpg" loading="lazy" alt="Тропа через дюнную траву к заливу у въезда на косу"><span class="rt-num">Остановка 01 / 07</span></div>
           <div class="rt-body">
             <div class="rt-meta"><span class="rt-badge">0 км</span><span class="rt-time">начало пути</span></div>
             <h3>Зеленоградск</h3>
@@ -612,7 +615,7 @@
         </article>
 
         <article class="rt-card">
-          <div class="rt-media"><img class="grade" src="photos/cine-pine.jpg" loading="lazy" alt="Туманный реликтовый лес Королевского бора"><span class="rt-num">Остановка 02 / 07</span></div>
+          <div class="rt-media"><img class="grade" src="photos/cine-path.jpg" loading="lazy" alt="Старая лесная дорога в тумане среди вековых деревьев"><span class="rt-num">Остановка 02 / 07</span></div>
           <div class="rt-body">
             <div class="rt-meta"><span class="rt-badge">6 км</span><span class="rt-time">10 минут в пути</span></div>
             <h3>Королевский бор</h3>
@@ -632,7 +635,7 @@
         </article>
 
         <article class="rt-card">
-          <div class="rt-media"><img class="grade" src="photos/cine-birds.jpg" loading="lazy" alt="Стая птиц над тростником на закате"><span class="rt-num">Остановка 04 / 07</span></div>
+          <div class="rt-media"><img class="grade" src="photos/cine-flock.jpg" loading="lazy" alt="Силуэты птиц в облачном небе над косой"><span class="rt-num">Остановка 04 / 07</span></div>
           <div class="rt-body">
             <div class="rt-meta"><span class="rt-badge">23 км</span><span class="rt-time">30 минут в пути</span></div>
             <h3>Фрингилла</h3>
@@ -652,7 +655,7 @@
         </article>
 
         <article class="rt-card">
-          <div class="rt-media"><img class="grade" src="photos/efa.jpg" loading="lazy" alt="Дюна Эфа с высоты"><span class="rt-num">Остановка 06 / 07</span></div>
+          <div class="rt-media"><img class="grade" src="photos/cine-boardwalk.jpg" loading="lazy" alt="Деревянный настил, ведущий на гребень дюны"><span class="rt-num">Остановка 06 / 07</span></div>
           <div class="rt-body">
             <div class="rt-meta"><span class="rt-badge">42 км</span><span class="rt-time">50 минут в пути</span></div>
             <h3>Высота Эфа</h3>
@@ -662,7 +665,7 @@
         </article>
 
         <article class="rt-card">
-          <div class="rt-media"><img class="grade" src="photos/panorama.jpg" loading="lazy" alt="Панорама дюн, залива и посёлка Морское"><span class="rt-num">Остановка 07 / 07</span></div>
+          <div class="rt-media"><img class="grade" src="photos/cine-boats.jpg" loading="lazy" alt="Рыбацкие лодки в тростнике на рассвете в тумане"><span class="rt-num">Остановка 07 / 07</span></div>
           <div class="rt-body">
             <div class="rt-meta"><span class="rt-badge">44 км</span><span class="rt-time">55 минут в пути</span></div>
             <h3>Морское</h3>
@@ -696,42 +699,53 @@
 <!-- GALLERY -->
 <section class="gallery" id="gallery" data-place="Галерея" data-sub="краски">
   <div class="wrap">
-    <div class="head">
+    <div class="g-head">
       <h2 class="reveal">Краски косы</h2>
-      <span class="mono reveal">Плёнка · 7 кадров</span>
+      <span class="mono reveal">7 кадров · тяните в сторону</span>
     </div>
-    <div class="reel-wrap reveal">
-      <div class="reel">
-        <figure class="frame tall">
-          <div class="fr-media"><img class="grade" src="photos/cine-pine.jpg" loading="lazy" alt="Туманный сосновый лес"></div>
-          <figcaption><div class="fr-num">Кадр 01</div><div class="fr-name">Королевский бор</div><p class="fr-desc">Столетние сосны, помнящие прусских королей</p></figcaption>
-        </figure>
-        <figure class="frame wide">
-          <div class="fr-media"><img class="grade" src="photos/dune-slope.jpg" loading="lazy" alt="Склон дюны, уходящий в залив"></div>
-          <figcaption><div class="fr-num">Кадр 02</div><div class="fr-name">Склон дюны</div><p class="fr-desc">Гребень песка стекает прямо в тихий залив</p></figcaption>
-        </figure>
-        <figure class="frame tall">
-          <div class="fr-media"><img class="grade" src="photos/lagoon.jpg" loading="lazy" alt="Куршский залив с лодкой"></div>
-          <figcaption><div class="fr-num">Кадр 03</div><div class="fr-name">Залив</div><p class="fr-desc">Тростник и рыбацкие лодки на закатной воде</p></figcaption>
-        </figure>
-        <figure class="frame wider">
-          <div class="fr-media"><img class="grade" src="photos/efa.jpg" loading="lazy" alt="Дюны с высоты"></div>
-          <figcaption><div class="fr-num">Кадр 04</div><div class="fr-name">Дюны сверху</div><p class="fr-desc">Высота Эфа с высоты птичьего полёта</p></figcaption>
-        </figure>
-        <figure class="frame tall">
-          <div class="fr-media"><img class="grade" src="photos/cine-forest.jpg" loading="lazy" alt="Верхушки леса в тумане"></div>
-          <figcaption><div class="fr-num">Кадр 05</div><div class="fr-name">Лес в дымке</div><p class="fr-desc">Хвоя, растворяющаяся в утреннем тумане</p></figcaption>
-        </figure>
-        <figure class="frame wider">
-          <div class="fr-media"><img class="grade" src="photos/panorama.jpg" loading="lazy" alt="Панорама дюн и залива"></div>
-          <figcaption><div class="fr-num">Кадр 06</div><div class="fr-name">Панорама с Эфа</div><p class="fr-desc">Дюна, море и посёлок Морское одним взглядом</p></figcaption>
-        </figure>
-        <figure class="frame wide">
-          <div class="fr-media"><img class="grade" src="photos/aerial.jpg" loading="lazy" alt="Коса с высоты птичьего полёта"></div>
-          <figcaption><div class="fr-num">Кадр 07</div><div class="fr-name">Полоса суши</div><p class="fr-desc">98 километров песка между двух вод</p></figcaption>
-        </figure>
-      </div>
-      <p class="reel-hint mono">← перетащите →</p>
+  </div>
+
+  <div class="g-rail" id="gRail" tabindex="0" role="region" aria-label="Галерея: кадры Куршской косы, прокрутка по горизонтали">
+    <div class="g-track">
+      <figure class="g-slide is-active">
+        <img class="grade" src="photos/cine-sand.jpg" loading="lazy" alt="Песчаная рябь крупным планом">
+        <figcaption class="g-cap"><div class="idx mono">01 — Песок</div><h3>Рябь на дюне</h3><p>Ветер расчерчивает склон заново каждый день — рисунок не повторяется дважды.</p></figcaption>
+      </figure>
+      <figure class="g-slide">
+        <img class="grade" src="photos/cine-bog.jpg" loading="lazy" alt="Рассвет над туманным сосновым бором">
+        <figcaption class="g-cap"><div class="idx mono">02 — Рассвет</div><h3>Солнце сквозь бор</h3><p>Утренний туман держится в соснах до первых лучей, а потом уходит к заливу.</p></figcaption>
+      </figure>
+      <figure class="g-slide">
+        <img class="grade" src="photos/cine-water.jpg" loading="lazy" alt="Тёмная вода Балтики с высоты">
+        <figcaption class="g-cap"><div class="idx mono">03 — Вода</div><h3>Балтика сверху</h3><p>Холодная тёмная вода, из которой после штормов на песок выносит янтарь.</p></figcaption>
+      </figure>
+      <figure class="g-slide">
+        <img class="grade" src="photos/cine-rays.jpg" loading="lazy" alt="Лучи света сквозь туман над лесом">
+        <figcaption class="g-cap"><div class="idx mono">04 — Свет</div><h3>Лучи в тумане</h3><p>Свет пробивает дымку узкими полосами — самое тихое время на косе.</p></figcaption>
+      </figure>
+      <figure class="g-slide">
+        <img class="grade" src="photos/dancing2.jpg" loading="lazy" alt="Скрученные стволы сосен Танцующего леса">
+        <figcaption class="g-cap"><div class="idx mono">05 — Лес</div><h3>Танцующий лес</h3><p>Стволы, свёрнутые в кольца и спирали, будто застыли посреди движения.</p></figcaption>
+      </figure>
+      <figure class="g-slide">
+        <img class="grade" src="photos/panorama.jpg" loading="lazy" alt="Панорама дюн, залива и посёлка Морское">
+        <figcaption class="g-cap"><div class="idx mono">06 — Простор</div><h3>Панорама с Эфа</h3><p>С гребня дюны видно разом море, залив и черепицу Морского.</p></figcaption>
+      </figure>
+      <figure class="g-slide">
+        <img class="grade" src="photos/sunset.jpg" loading="lazy" alt="Закат над Балтийским морем">
+        <figcaption class="g-cap"><div class="idx mono">07 — Закат</div><h3>Золотой час</h3><p>Солнце уходит в Балтику, и песок на несколько минут становится золотым.</p></figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="g-foot">
+      <span class="g-count" id="gCount">01 / 07</span>
+      <span class="g-bar"><i id="gBar"></i></span>
+      <span class="g-nav">
+        <button type="button" id="gPrev" aria-label="Предыдущий кадр">←</button>
+        <button type="button" id="gNext" aria-label="Следующий кадр">→</button>
+      </span>
     </div>
   </div>
 </section>
@@ -910,6 +924,86 @@
     });
   });
   if(rtGroups.length) rtActivate(0);
+
+  /* ----- gallery: cinematic rail ----- */
+  var gRail = document.getElementById('gRail');
+  if(gRail){
+    var gSlides = [].slice.call(gRail.querySelectorAll('.g-slide')),
+        gBar = document.getElementById('gBar'),
+        gCount = document.getElementById('gCount'),
+        gPrev = document.getElementById('gPrev'),
+        gNext = document.getElementById('gNext'),
+        gIdx = -1, gTick = false;
+
+    function pad2(n){ return (n < 10 ? '0' : '') + n; }
+
+    function gUpdate(){
+      var mid = gRail.scrollLeft + gRail.clientWidth / 2, best = 0, bd = Infinity;
+      for(var i=0;i<gSlides.length;i++){
+        var c = gSlides[i].offsetLeft + gSlides[i].offsetWidth / 2, d = Math.abs(c - mid);
+        if(d < bd){ bd = d; best = i; }
+      }
+      if(best !== gIdx){
+        gIdx = best;
+        for(var k=0;k<gSlides.length;k++) gSlides[k].classList.toggle('is-active', k === best);
+        if(gCount) gCount.textContent = pad2(best+1) + ' / ' + pad2(gSlides.length);
+        if(gBar){
+          gBar.style.width = (100 / gSlides.length) + '%';
+          gBar.style.left = (best * 100 / gSlides.length) + '%';
+        }
+      }
+      if(gPrev) gPrev.disabled = gRail.scrollLeft <= 2;
+      if(gNext) gNext.disabled = gRail.scrollLeft >= gRail.scrollWidth - gRail.clientWidth - 2;
+    }
+
+    gRail.addEventListener('scroll', function(){
+      if(!gTick){ requestAnimationFrame(function(){ gUpdate(); gTick = false; }); gTick = true; }
+    }, {passive:true});
+
+    function gGo(dir){
+      var step = gSlides[0] ? gSlides[0].offsetWidth + 20 : gRail.clientWidth * 0.8;
+      gRail.scrollBy({ left: dir * step, behavior: reduce ? 'auto' : 'smooth' });
+    }
+    if(gPrev) gPrev.addEventListener('click', function(){ gGo(-1); });
+    if(gNext) gNext.addEventListener('click', function(){ gGo(1); });
+    gRail.addEventListener('keydown', function(e){
+      if(e.key === 'ArrowRight'){ e.preventDefault(); gGo(1); }
+      else if(e.key === 'ArrowLeft'){ e.preventDefault(); gGo(-1); }
+    });
+
+    /* drag with mouse (touch uses native scroll) */
+    var gDrag = false, gStartX = 0, gStartL = 0, gMoved = 0;
+    gRail.addEventListener('pointerdown', function(e){
+      if(e.pointerType === 'touch') return;
+      gDrag = true; gMoved = 0; gStartX = e.clientX; gStartL = gRail.scrollLeft;
+      gRail.classList.add('dragging');
+    });
+    window.addEventListener('pointermove', function(e){
+      if(!gDrag) return;
+      var dx = e.clientX - gStartX;
+      gMoved = Math.abs(dx);
+      gRail.scrollLeft = gStartL - dx;
+    });
+    window.addEventListener('pointerup', function(){
+      if(!gDrag) return;
+      gDrag = false;
+      gRail.classList.remove('dragging');
+      if(gMoved > 4 && gSlides.length){
+        var mid = gRail.scrollLeft + gRail.clientWidth / 2, best = 0, bd = Infinity;
+        for(var i=0;i<gSlides.length;i++){
+          var c = gSlides[i].offsetLeft + gSlides[i].offsetWidth / 2, d = Math.abs(c - mid);
+          if(d < bd){ bd = d; best = i; }
+        }
+        gRail.scrollTo({
+          left: gSlides[best].offsetLeft + gSlides[best].offsetWidth / 2 - gRail.clientWidth / 2,
+          behavior: reduce ? 'auto' : 'smooth'
+        });
+      }
+    });
+
+    window.addEventListener('resize', function(){ gIdx = -1; gUpdate(); });
+    gUpdate();
+  }
 
   /* ----- reveals + count-up ----- */
   function countUp(el){
