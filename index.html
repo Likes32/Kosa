@@ -171,30 +171,38 @@
   .scene.br .detail{margin-left:auto}
   .scene.cc .detail{margin-left:auto;margin-right:auto}
 
-  /* ---------- route: pinned journey ---------- */
-  .route{background:var(--night);color:var(--cream);min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:clamp(70px,10vh,110px) 0;overflow:hidden}
-  .route .rt-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:clamp(26px,4vh,46px)}
+  /* ---------- route: interactive map (hover a stop) ---------- */
+  .route{background:var(--night);color:var(--cream);padding:clamp(80px,13vh,160px) 0;overflow:hidden}
+  .route .rt-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:clamp(30px,4.5vh,56px)}
   .route .rt-head h2{font-size:clamp(1.9rem,4.2vw,3.1rem)}
   .route .rt-head .mono{color:var(--sand)}
-  .route .rt-stage{display:grid;grid-template-columns:minmax(230px,.82fr) 1.18fr;gap:clamp(24px,4.5vw,68px);align-items:center}
+  .route .rt-stage{display:grid;grid-template-columns:minmax(260px,.9fr) 1.1fr;gap:clamp(24px,4.5vw,64px);align-items:center}
   .route .rt-map{position:relative}
-  .route .rt-map svg{width:100%;height:auto;display:block;overflow:visible;max-height:62svh}
+  .route .rt-map svg{width:100%;height:auto;display:block;overflow:visible;max-height:76svh}
   .rt-hair{stroke:rgba(236,229,215,.07);stroke-width:1}
   .rt-elev-fill{fill:rgba(199,164,105,.09)}
   .rt-elev{fill:none;stroke:rgba(199,164,105,.5);stroke-width:1.4}
   .rt-elev-base{stroke:rgba(236,229,215,.14);stroke-width:1}
   .rt-road-bg{fill:none;stroke:rgba(236,229,215,.14);stroke-width:2.4;stroke-linecap:round}
-  .rt-road{fill:none;stroke:#F2EDE1;stroke-width:2.6;stroke-linecap:round;filter:drop-shadow(0 0 6px rgba(242,237,225,.35))}
-  .rt-stop{fill:var(--night);stroke:rgba(236,229,215,.4);stroke-width:2;transition:fill .5s var(--ease),stroke .5s var(--ease),filter .5s var(--ease)}
-  .rt-stop.lit{stroke:#F2EDE1}
-  .rt-stop.now{fill:var(--amber-lt);stroke:#fff;filter:drop-shadow(0 0 8px var(--amber-lt)) drop-shadow(0 0 18px rgba(215,154,68,.6))}
-  .rt-ring{fill:none;stroke:var(--amber);stroke-width:1;opacity:0;transition:opacity .5s var(--ease)}
-  .rt-stop.now + .rt-ring,.rt-ring.now{opacity:.6}
+  .rt-road{fill:none;stroke:rgba(242,237,225,.92);stroke-width:2.4;stroke-linecap:round}
+  .rt-trail{fill:none;stroke:var(--amber-lt);stroke-width:2.8;stroke-linecap:round;filter:drop-shadow(0 0 7px rgba(215,154,68,.75));transition:stroke-dashoffset .85s var(--ease)}
+  .rt-hit{fill:transparent;pointer-events:all;cursor:pointer}
+  .rt-g{outline:none}
+  .rt-stop{fill:var(--night);stroke:rgba(236,229,215,.45);stroke-width:2;transition:fill .45s var(--ease),stroke .45s var(--ease),filter .45s var(--ease)}
+  .rt-g:hover .rt-stop{stroke:#F2EDE1}
+  .rt-g.now .rt-stop{fill:var(--amber-lt);stroke:#fff;filter:drop-shadow(0 0 8px var(--amber-lt)) drop-shadow(0 0 18px rgba(215,154,68,.6))}
+  .rt-ring{fill:none;stroke:var(--amber);stroke-width:1;opacity:0;transition:opacity .45s var(--ease)}
+  .rt-g.now .rt-ring{opacity:.6}
+  .rt-g:focus-visible .rt-ring{opacity:.95;stroke:#fff}
   .rt-dot{fill:#fff;filter:drop-shadow(0 0 5px #fff) drop-shadow(0 0 14px var(--amber-lt))}
-  .rt-km{fill:rgba(236,229,215,.42);font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;transition:fill .5s var(--ease)}
-  .rt-km.now{fill:var(--amber-lt)}
+  .rt-name{fill:rgba(236,229,215,.55);font-family:var(--f-body);font-size:13px;font-weight:600;pointer-events:none;transition:fill .45s var(--ease)}
+  .rt-g:hover .rt-name{fill:rgba(246,239,224,.9)}
+  .rt-g.now .rt-name{fill:#F6EFE0}
+  .rt-km{fill:rgba(236,229,215,.34);font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;pointer-events:none;transition:fill .45s var(--ease)}
+  .rt-g.now .rt-km{fill:var(--amber-lt)}
   .rt-cap{fill:var(--sand);font-family:var(--f-mono);font-size:11px;letter-spacing:.2em}
   .rt-axis{fill:rgba(236,229,215,.3);font-family:var(--f-mono);font-size:10px;letter-spacing:.16em}
+  .route .rt-hint{margin-top:16px;text-align:center;color:var(--fog);font-family:var(--f-mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase}
   .route .rt-cards{display:grid;position:relative}
   .rt-card{grid-area:1/1;opacity:0;transform:translateY(26px) scale(.985);transition:opacity .7s var(--ease),transform .7s var(--ease);pointer-events:none}
   .rt-card.on{opacity:1;transform:none;pointer-events:auto}
@@ -514,15 +522,15 @@
 
     <div class="rt-stage">
       <div class="rt-map">
-        <svg viewBox="0 0 240 900" role="img" aria-label="Схема маршрута по Куршской косе с профилем высот">
+        <svg viewBox="0 0 300 900" role="img" aria-label="Схема маршрута по Куршской косе с профилем высот">
           <title>Маршрут и профиль высот Куршской косы</title>
-          <line class="rt-hair" x1="20" y1="50" x2="230" y2="50"></line>
-          <line class="rt-hair" x1="20" y1="185" x2="230" y2="185"></line>
-          <line class="rt-hair" x1="20" y1="320" x2="230" y2="320"></line>
-          <line class="rt-hair" x1="20" y1="455" x2="230" y2="455"></line>
-          <line class="rt-hair" x1="20" y1="590" x2="230" y2="590"></line>
-          <line class="rt-hair" x1="20" y1="725" x2="230" y2="725"></line>
-          <line class="rt-hair" x1="20" y1="860" x2="230" y2="860"></line>
+          <line class="rt-hair" x1="20" y1="50" x2="290" y2="50"></line>
+          <line class="rt-hair" x1="20" y1="185" x2="290" y2="185"></line>
+          <line class="rt-hair" x1="20" y1="320" x2="290" y2="320"></line>
+          <line class="rt-hair" x1="20" y1="455" x2="290" y2="455"></line>
+          <line class="rt-hair" x1="20" y1="590" x2="290" y2="590"></line>
+          <line class="rt-hair" x1="20" y1="725" x2="290" y2="725"></line>
+          <line class="rt-hair" x1="20" y1="860" x2="290" y2="860"></line>
 
           <text class="rt-axis" x="26" y="26">ПРОФИЛЬ ВЫСОТ</text>
           <line class="rt-elev-base" x1="26" y1="40" x2="26" y2="870"></line>
@@ -535,33 +543,61 @@
 
           <path class="rt-road-bg" d="M152,50 C142,95 124,140 128,185 C132,230 170,275 165,320 C160,365 122,410 127,455 C132,500 166,545 160,590 C154,635 122,680 130,725 C138,770 156,815 150,860"></path>
           <path class="rt-road" id="rtRoad" d="M152,50 C142,95 124,140 128,185 C132,230 170,275 165,320 C160,365 122,410 127,455 C132,500 166,545 160,590 C154,635 122,680 130,725 C138,770 156,815 150,860"></path>
+          <path class="rt-trail" id="rtTrail" d="M152,50 C142,95 124,140 128,185 C132,230 170,275 165,320 C160,365 122,410 127,455 C132,500 166,545 160,590 C154,635 122,680 130,725 C138,770 156,815 150,860"></path>
 
-          <circle class="rt-ring" cx="152" cy="50" r="13"></circle>
-          <circle class="rt-ring" cx="128" cy="185" r="13"></circle>
-          <circle class="rt-ring" cx="165" cy="320" r="13"></circle>
-          <circle class="rt-ring" cx="127" cy="455" r="13"></circle>
-          <circle class="rt-ring" cx="160" cy="590" r="13"></circle>
-          <circle class="rt-ring" cx="130" cy="725" r="13"></circle>
-          <circle class="rt-ring" cx="150" cy="860" r="13"></circle>
-
-          <circle class="rt-stop" cx="152" cy="50" r="6"></circle>
-          <circle class="rt-stop" cx="128" cy="185" r="6"></circle>
-          <circle class="rt-stop" cx="165" cy="320" r="6"></circle>
-          <circle class="rt-stop" cx="127" cy="455" r="6"></circle>
-          <circle class="rt-stop" cx="160" cy="590" r="6"></circle>
-          <circle class="rt-stop" cx="130" cy="725" r="7.5"></circle>
-          <circle class="rt-stop" cx="150" cy="860" r="6"></circle>
-
-          <text class="rt-km" x="190" y="54">0 км</text>
-          <text class="rt-km" x="190" y="189">6 км</text>
-          <text class="rt-km" x="190" y="324">11 км</text>
-          <text class="rt-km" x="190" y="459">23 км</text>
-          <text class="rt-km" x="190" y="594">37 км</text>
-          <text class="rt-km" x="190" y="729">42 км</text>
-          <text class="rt-km" x="190" y="864">44 км</text>
+          <g class="rt-g now" data-i="0" tabindex="0" role="button" aria-label="Зеленоградск, 0 км">
+            <rect class="rt-hit" x="20" y="18" width="270" height="64"></rect>
+            <circle class="rt-ring" cx="152" cy="50" r="13"></circle>
+            <circle class="rt-stop" cx="152" cy="50" r="6"></circle>
+            <text class="rt-name" x="186" y="47">Зеленоградск</text>
+            <text class="rt-km" x="186" y="63">0 км</text>
+          </g>
+          <g class="rt-g" data-i="1" tabindex="0" role="button" aria-label="Королевский бор, 6 км">
+            <rect class="rt-hit" x="20" y="153" width="270" height="64"></rect>
+            <circle class="rt-ring" cx="128" cy="185" r="13"></circle>
+            <circle class="rt-stop" cx="128" cy="185" r="6"></circle>
+            <text class="rt-name" x="186" y="182">Королевский бор</text>
+            <text class="rt-km" x="186" y="198">6 км</text>
+          </g>
+          <g class="rt-g" data-i="2" tabindex="0" role="button" aria-label="Лесной, 11 км">
+            <rect class="rt-hit" x="20" y="288" width="270" height="64"></rect>
+            <circle class="rt-ring" cx="165" cy="320" r="13"></circle>
+            <circle class="rt-stop" cx="165" cy="320" r="6"></circle>
+            <text class="rt-name" x="196" y="317">Лесной</text>
+            <text class="rt-km" x="196" y="333">11 км</text>
+          </g>
+          <g class="rt-g" data-i="3" tabindex="0" role="button" aria-label="Станция Фрингилла, 23 км">
+            <rect class="rt-hit" x="20" y="423" width="270" height="64"></rect>
+            <circle class="rt-ring" cx="127" cy="455" r="13"></circle>
+            <circle class="rt-stop" cx="127" cy="455" r="6"></circle>
+            <text class="rt-name" x="186" y="452">Фрингилла</text>
+            <text class="rt-km" x="186" y="468">23 км</text>
+          </g>
+          <g class="rt-g" data-i="4" tabindex="0" role="button" aria-label="Танцующий лес, 37 км">
+            <rect class="rt-hit" x="20" y="558" width="270" height="64"></rect>
+            <circle class="rt-ring" cx="160" cy="590" r="13"></circle>
+            <circle class="rt-stop" cx="160" cy="590" r="6"></circle>
+            <text class="rt-name" x="191" y="587">Танцующий лес</text>
+            <text class="rt-km" x="191" y="603">37 км</text>
+          </g>
+          <g class="rt-g" data-i="5" tabindex="0" role="button" aria-label="Высота Эфа, 42 км">
+            <rect class="rt-hit" x="20" y="693" width="270" height="64"></rect>
+            <circle class="rt-ring" cx="130" cy="725" r="13"></circle>
+            <circle class="rt-stop" cx="130" cy="725" r="7.5"></circle>
+            <text class="rt-name" x="186" y="722">Высота Эфа</text>
+            <text class="rt-km" x="186" y="738">42 км · 62 м</text>
+          </g>
+          <g class="rt-g" data-i="6" tabindex="0" role="button" aria-label="Морское, 44 км">
+            <rect class="rt-hit" x="20" y="828" width="270" height="64"></rect>
+            <circle class="rt-ring" cx="150" cy="860" r="13"></circle>
+            <circle class="rt-stop" cx="150" cy="860" r="6"></circle>
+            <text class="rt-name" x="186" y="857">Морское</text>
+            <text class="rt-km" x="186" y="873">44 км</text>
+          </g>
 
           <circle class="rt-dot" id="rtDot" cx="152" cy="50" r="4.5"></circle>
         </svg>
+        <p class="rt-hint">наведите на остановку</p>
       </div>
 
       <div class="rt-cards">
@@ -834,6 +870,47 @@
 
   /* custom cursor removed — native cursor restored */
 
+  /* ----- route map: hover a stop -> its card ----- */
+  var rtRoad = document.getElementById('rtRoad'),
+      rtTrail = document.getElementById('rtTrail'),
+      rtDot = document.getElementById('rtDot'),
+      rtGroups = [].slice.call(document.querySelectorAll('.rt-g')),
+      rtCards = [].slice.call(document.querySelectorAll('.rt-card')),
+      rtPts = [[152,50],[128,185],[165,320],[127,455],[160,590],[130,725],[150,860]],
+      rtT = [0, 1/6, 2/6, 0.5, 4/6, 5/6, 1],
+      rtActive = -1, rtTrailLen = 0;
+
+  if(rtTrail){
+    rtTrailLen = rtTrail.getTotalLength();
+    rtTrail.style.strokeDasharray = rtTrailLen;
+    rtTrail.style.strokeDashoffset = rtTrailLen;
+  }
+
+  function rtActivate(i){
+    if(i === rtActive || i < 0 || i >= rtGroups.length) return;
+    rtActive = i;
+    for(var k=0;k<rtGroups.length;k++){
+      rtGroups[k].classList.toggle('now', k === i);
+      if(rtCards[k]) rtCards[k].classList.toggle('on', k === i);
+    }
+    if(rtTrail) rtTrail.style.strokeDashoffset = rtTrailLen * (1 - rtT[i]);
+    if(rtDot && rtPts[i]){
+      if(window.gsap && !reduce) gsap.to(rtDot,{attr:{cx:rtPts[i][0],cy:rtPts[i][1]},duration:.75,ease:'power3.out'});
+      else { rtDot.setAttribute('cx',rtPts[i][0]); rtDot.setAttribute('cy',rtPts[i][1]); }
+    }
+  }
+
+  rtGroups.forEach(function(g){
+    var i = parseInt(g.getAttribute('data-i'), 10);
+    g.addEventListener('mouseenter', function(){ rtActivate(i); });
+    g.addEventListener('focus', function(){ rtActivate(i); });
+    g.addEventListener('click', function(){ rtActivate(i); });
+    g.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); rtActivate(i); }
+    });
+  });
+  if(rtGroups.length) rtActivate(0);
+
   /* ----- reveals + count-up ----- */
   function countUp(el){
     var target = +el.getAttribute('data-count'), unit = el.querySelector('.u'), dur=1500, s=null;
@@ -870,51 +947,14 @@
     gsap.utils.toArray('.fact .n').forEach(function(el){
       ScrollTrigger.create({trigger:el,start:'top 85%',once:true,onEnter:function(){countUp(el);}});
     });
-    /* route — pinned journey down the spit */
-    var rtSec = document.querySelector('.route'),
-        rtRoad = document.getElementById('rtRoad'),
-        rtDot = document.getElementById('rtDot'),
-        rtCards = gsap.utils.toArray('.rt-card'),
-        rtStops = gsap.utils.toArray('.rt-stop'),
-        rtRings = gsap.utils.toArray('.rt-ring'),
-        rtKms = gsap.utils.toArray('.rt-km'),
-        stopT = [0, 1/6, 2/6, 0.5, 4/6, 5/6, 1];
-
-    function rtSet(p){
-      p = Math.max(0, Math.min(1, p));
-      var L = rtRoad.getTotalLength(), i;
-      rtRoad.style.strokeDashoffset = L*(1-p);
-      var pt = rtRoad.getPointAtLength(L*p);
-      rtDot.setAttribute('cx', pt.x);
-      rtDot.setAttribute('cy', pt.y);
-      var idx = 0;
-      for(i=0;i<stopT.length;i++){ if(p >= stopT[i]-0.04) idx = i; }
-      for(i=0;i<rtStops.length;i++){
-        rtStops[i].classList.toggle('lit', p >= stopT[i]-0.04);
-        rtStops[i].classList.toggle('now', i === idx);
-        if(rtRings[i]) rtRings[i].classList.toggle('now', i === idx);
-        if(rtKms[i]) rtKms[i].classList.toggle('now', i === idx);
-        if(rtCards[i]) rtCards[i].classList.toggle('on', i === idx);
-      }
-    }
-
-    if(rtRoad && rtDot && window.innerWidth > 900){
+    /* route — the road draws itself as the map scrolls into view */
+    if(rtRoad){
       var RL = rtRoad.getTotalLength();
-      rtRoad.style.strokeDasharray = RL;
-      rtRoad.style.strokeDashoffset = RL;
-      ScrollTrigger.create({
-        trigger: rtSec,
-        start: 'top top',
-        end: function(){ return '+=' + Math.round(window.innerHeight * 4.2); },
-        pin: true,
-        anticipatePin: 1,
-        invalidateOnRefresh: true,
-        onUpdate: function(self){ rtSet(self.progress); },
-        onRefresh: function(self){ rtSet(self.progress); }
-      });
-      rtSet(0);
-    } else if(rtSec){
-      rtSec.classList.add('rt-static');
+      gsap.set(rtRoad,{strokeDasharray:RL,strokeDashoffset:RL});
+      gsap.to(rtRoad,{strokeDashoffset:0,ease:'none',
+        scrollTrigger:{trigger:'.rt-map',start:'top 85%',end:'bottom 72%',scrub:.9}});
+      gsap.from('.rt-g',{opacity:0,x:-14,duration:.7,stagger:.09,ease:'power2.out',
+        scrollTrigger:{trigger:'.rt-map',start:'top 72%'}});
     }
 
     /* mini 3D route panel — scroll-driven dot + progressive road + lit stops */
