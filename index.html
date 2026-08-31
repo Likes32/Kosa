@@ -11,9 +11,9 @@
 <style>
   :root{
     --mist:#E7E3D8; --mist-2:#DAD5C8; --paper:#F0ECE1;
-    --fog:#9AA19B;
+    --fog:#B3B8B0;
     --ink:#181410; --ink-2:#221C15; --night:#12100B;
-    --cream:#ECE5D7; --cream-dim:rgba(236,229,215,.62);
+    --cream:#ECE5D7; --cream-dim:rgba(238,231,217,.82);
     --sand:#C7A469; --amber:#C07E27; --amber-lt:#D79A44;
     --sea:#5A7370;
     --line:rgba(24,20,16,.16);
@@ -28,7 +28,7 @@
   img{display:block;max-width:100%}
   a{color:inherit;text-decoration:none}
   h1,h2,h3{font-family:var(--f-disp);font-weight:700;margin:0;line-height:1.02;letter-spacing:-.015em}
-  .mono{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase}
+  .mono{font-family:var(--f-mono);font-size:.8rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
   .wrap{width:min(1280px,100%);margin:0 auto;padding:0 clamp(22px,5vw,64px)}
   ::selection{background:var(--amber);color:#fff}
 
@@ -98,7 +98,8 @@
     linear-gradient(0deg,rgba(9,7,4,.9),rgba(9,7,4,.34) 38%,transparent 64%),
     radial-gradient(130% 105% at 50% 40%,transparent 46%,rgba(9,7,4,.5))}
   .hero-inner{position:relative;z-index:3;width:100%;padding-bottom:clamp(26px,4.2vh,52px);color:var(--cream)}
-  .hero .eyebrow{display:flex;align-items:center;gap:14px;color:var(--sand);margin:0 0 clamp(16px,2.4vh,26px);overflow:hidden}
+  .hero .eyebrow{display:flex;align-items:center;gap:14px;color:#F0DDB4;margin:0 0 clamp(16px,2.4vh,26px);overflow:hidden;
+    text-shadow:0 2px 12px rgba(0,0,0,.75)}
   .hero .eyebrow span{display:inline-block;transform:translateY(110%);animation:up 1s .2s var(--ease) forwards}
   .hero .eyebrow::before{content:"";width:clamp(28px,4vw,54px);height:1px;background:var(--amber);flex:0 0 auto;
     transform:scaleX(0);transform-origin:left;animation:ruleIn 1s .1s var(--ease) forwards}
@@ -123,12 +124,15 @@
   .hero-facts li+li{padding-left:clamp(14px,3vw,44px)}
   .hero-facts li+li::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);
     height:28px;width:1px;background:rgba(236,229,215,.17)}
-  .hero-facts .k{font-family:var(--f-mono);font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--fog);white-space:nowrap}
-  .hero-facts b{font-family:var(--f-disp);font-weight:700;font-size:clamp(1.05rem,1.7vw,1.4rem);color:#F2E9D6;line-height:1;white-space:nowrap}
-  .hero-scroll{display:inline-flex;align-items:center;gap:12px;color:var(--cream-dim);white-space:nowrap;
-    font-family:var(--f-mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;transition:color .35s var(--ease)}
+  .hero-facts .k{font-family:var(--f-mono);font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+    color:rgba(240,235,224,.8);white-space:nowrap;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+  .hero-facts b{font-family:var(--f-disp);font-weight:700;font-size:clamp(1.15rem,1.8vw,1.5rem);color:#FAF3E4;line-height:1;
+    white-space:nowrap;text-shadow:0 2px 14px rgba(0,0,0,.6)}
+  .hero-scroll{display:inline-flex;align-items:center;gap:12px;color:#F3EBDB;white-space:nowrap;
+    font-family:var(--f-mono);font-size:.74rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    text-shadow:0 2px 12px rgba(0,0,0,.7);transition:color .35s var(--ease)}
   .hero-scroll:hover{color:#fff}
-  .hero-scroll i{display:block;width:clamp(34px,4vw,52px);height:1px;background:rgba(236,229,215,.45);position:relative;overflow:hidden}
+  .hero-scroll i{display:block;width:clamp(34px,4vw,52px);height:2px;background:rgba(236,229,215,.55);position:relative;overflow:hidden;border-radius:2px}
   .hero-scroll i::after{content:"";position:absolute;inset:0;background:var(--amber-lt);animation:cue 2.4s var(--ease) infinite}
   @keyframes cue{0%{transform:translateX(-100%)}60%,100%{transform:translateX(100%)}}
   @media (max-width:820px){
@@ -150,30 +154,29 @@
   .manifesto .big{font-family:var(--f-disp);font-weight:700;font-size:clamp(2rem,4.3vw,3.9rem);line-height:1.05;letter-spacing:-.02em;max-width:15ch}
   .manifesto .big em{font-style:italic;color:var(--sea)}
   .manifesto .note{max-width:460px;margin:42px 0 0;color:#5a5346;font-size:1.03rem}
-  .route3d{position:relative;aspect-ratio:1/1;border-radius:22px;overflow:hidden;
-    background:radial-gradient(120% 100% at 50% 8%,#211a10,#0a0805 74%);
-    box-shadow:0 50px 100px -46px rgba(0,0,0,.8),inset 0 0 0 1px rgba(255,255,255,.07),inset 0 1px 0 rgba(255,255,255,.1)}
-  .route3d .r3-stage{position:absolute;inset:0;perspective:1000px;display:flex;align-items:center;justify-content:center}
-  .route3d .r3-svg{width:86%;height:86%;transform:rotateX(21deg) rotateZ(-5deg) scale(1.02);transform-origin:50% 58%;overflow:visible}
-  .route3d .r3-grid line{stroke:rgba(199,164,105,.13)}
-  .route3d .r3-road-bg{fill:none;stroke:rgba(236,229,215,.13);stroke-width:2}
-  .route3d .r3-road{fill:none;stroke:var(--amber-lt);stroke-width:2.2;stroke-linecap:round;filter:drop-shadow(0 0 4px rgba(215,154,68,.7))}
-  .route3d .r3-pt{fill:#100c07;stroke:rgba(236,229,215,.5);stroke-width:2;transition:fill .4s var(--ease),stroke .4s var(--ease),filter .4s var(--ease)}
-  .route3d .r3-pt.lit{fill:var(--amber-lt);stroke:#fff;filter:drop-shadow(0 0 7px var(--amber-lt)) drop-shadow(0 0 16px rgba(215,154,68,.75))}
-  .route3d .r3-dot{fill:#fff;opacity:1;filter:drop-shadow(0 0 6px #fff) drop-shadow(0 0 16px var(--amber-lt))}
-  .route3d .r3-corner{position:absolute;width:20px;height:20px;border:1.5px solid rgba(236,229,215,.4);z-index:3;pointer-events:none}
-  .route3d .r3-corner.tl{top:16px;left:16px;border-right:0;border-bottom:0}
-  .route3d .r3-corner.tr{top:16px;right:16px;border-left:0;border-bottom:0}
-  .route3d .r3-corner.bl{bottom:16px;left:16px;border-right:0;border-top:0}
-  .route3d .r3-corner.br{bottom:16px;right:16px;border-left:0;border-top:0}
-  .route3d .r3-label{position:absolute;top:20px;left:24px;z-index:3;color:var(--cream);pointer-events:none}
-  .route3d .r3-label span{display:block;font-family:var(--f-disp);font-size:1.42rem;font-weight:700;line-height:1.1;transition:opacity .3s}
-  .route3d .r3-label i{font-style:normal;font-family:var(--f-mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--sand);opacity:.85}
-  .route3d .r3-read{position:absolute;bottom:18px;right:22px;z-index:3;text-align:right;pointer-events:none;font-family:var(--f-mono);color:var(--amber-lt);font-size:.72rem;letter-spacing:.1em}
-  .route3d .r3-read b{display:block;font-size:1.05rem;color:var(--cream)}
+  /* cross-section of the spit — engraved on paper */
+  .section-cut{margin:0}
+  .section-cut svg{width:100%;height:auto;display:block;overflow:visible}
+  .cut-sea-line{stroke:rgba(24,20,16,.3);stroke-width:1}
+  .cut-hatch line{stroke:rgba(94,116,114,.5);stroke-width:1.4;stroke-linecap:round}
+  .cut-fill{fill:rgba(199,164,105,.18)}
+  .cut-line{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round;stroke-linecap:round}
+  .cut-trees line{stroke:rgba(24,20,16,.72);stroke-width:1.6;stroke-linecap:round}
+  .cut-trees path{fill:rgba(38,60,50,.82)}
+  .cut-dim-line{stroke:var(--amber-deep);stroke-width:1.4}
+  .cut-tick{stroke:var(--amber-deep);stroke-width:1.6}
+  .cut-dim-bg{fill:var(--mist)}
+  .cut-dim-t{fill:var(--amber-deep);font-family:var(--f-mono);font-size:16px;font-weight:700;letter-spacing:.04em}
+  .cut-h{stroke:rgba(24,20,16,.34);stroke-width:1;stroke-dasharray:3 4}
+  .cut-lab{fill:#4b4438;font-family:var(--f-mono);font-size:12.5px;font-weight:700;letter-spacing:.09em}
+  .cut-lab-soft{fill:#6d6555}
+  .section-cut figcaption{margin-top:18px;text-align:center;color:#6d6555;font-family:var(--f-mono);
+    font-size:.7rem;letter-spacing:.09em;text-transform:uppercase}
   @media (max-width:900px){
     .manifesto .mf-grid{grid-template-columns:1fr;gap:46px}
-    .route3d{max-width:480px;aspect-ratio:5/4;margin:0}
+    .section-cut{max-width:560px}
+    .cut-lab{font-size:14px}
+    .cut-dim-t{font-size:18px}
   }
   .reveal-line{display:block;overflow:hidden}
   .reveal-line>span{display:block}
@@ -228,14 +231,14 @@
   .rt-g.now .rt-ring{opacity:.6}
   .rt-g:focus-visible .rt-ring{opacity:.95;stroke:#fff}
   .rt-dot{fill:#fff;filter:drop-shadow(0 0 5px #fff) drop-shadow(0 0 14px var(--amber-lt))}
-  .rt-name{fill:rgba(236,229,215,.55);font-family:var(--f-body);font-size:13px;font-weight:600;pointer-events:none;transition:fill .45s var(--ease)}
-  .rt-g:hover .rt-name{fill:rgba(246,239,224,.9)}
-  .rt-g.now .rt-name{fill:#F6EFE0}
-  .rt-km{fill:rgba(236,229,215,.34);font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;pointer-events:none;transition:fill .45s var(--ease)}
+  .rt-name{fill:rgba(240,234,222,.82);font-family:var(--f-body);font-size:14.5px;font-weight:700;pointer-events:none;transition:fill .45s var(--ease)}
+  .rt-g:hover .rt-name{fill:#FBF5E8}
+  .rt-g.now .rt-name{fill:#FBF5E8}
+  .rt-km{fill:rgba(236,229,215,.62);font-family:var(--f-mono);font-size:12.5px;font-weight:600;letter-spacing:.06em;pointer-events:none;transition:fill .45s var(--ease)}
   .rt-g.now .rt-km{fill:var(--amber-lt)}
-  .rt-cap{fill:var(--sand);font-family:var(--f-mono);font-size:11px;letter-spacing:.2em}
-  .rt-axis{fill:rgba(236,229,215,.3);font-family:var(--f-mono);font-size:10px;letter-spacing:.16em}
-  .route .rt-hint{margin-top:16px;text-align:center;color:var(--fog);font-family:var(--f-mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase}
+  .rt-cap{fill:#E4C98F;font-family:var(--f-mono);font-size:12px;font-weight:600;letter-spacing:.16em}
+  .rt-axis{fill:rgba(236,229,215,.6);font-family:var(--f-mono);font-size:11.5px;font-weight:600;letter-spacing:.1em}
+  .route .rt-hint{margin-top:16px;text-align:center;color:rgba(236,229,215,.7);font-family:var(--f-mono);font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
   .route .rt-spine{display:none}
   .route .rt-cards{display:grid;position:relative}
   .rt-card{grid-area:1/1;opacity:0;transform:translateY(26px) scale(.985);transition:opacity .7s var(--ease),transform .7s var(--ease);pointer-events:none}
@@ -243,16 +246,16 @@
   .rt-media{position:relative;aspect-ratio:16/10;border-radius:18px;overflow:hidden;box-shadow:0 40px 80px -40px rgba(0,0,0,.8),inset 0 0 0 1px rgba(255,255,255,.07)}
   .rt-media img{width:100%;height:100%;object-fit:cover}
   .rt-media::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(8,7,4,.5),transparent 55%)}
-  .rt-num{position:absolute;left:18px;bottom:14px;z-index:2;font-family:var(--f-mono);font-size:.64rem;letter-spacing:.2em;color:rgba(255,255,255,.75)}
+  .rt-num{position:absolute;left:18px;bottom:14px;z-index:2;font-family:var(--f-mono);font-size:.72rem;font-weight:600;letter-spacing:.12em;color:rgba(255,255,255,.92);text-shadow:0 1px 8px rgba(0,0,0,.7)}
   .rt-body{padding-top:clamp(18px,2.4vh,28px)}
   .rt-meta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:14px}
   .rt-badge{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.14em;color:var(--night);background:var(--amber-lt);padding:5px 12px;border-radius:100px;font-weight:700}
-  .rt-meta .rt-time{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fog)}
+  .rt-meta .rt-time{font-family:var(--f-mono);font-size:.74rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(236,229,215,.78)}
   .rt-card h3{font-size:clamp(1.8rem,3.4vw,2.9rem);color:#F6EFE0}
   .rt-card p{margin:14px 0 0;color:var(--cream-dim);font-size:clamp(.98rem,1.25vw,1.1rem);max-width:44ch}
-  .rt-foot{display:flex;gap:20px;flex-wrap:wrap;margin-top:20px;padding-top:16px;border-top:1px solid rgba(236,229,215,.12);font-family:var(--f-mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fog)}
+  .rt-foot{display:flex;gap:20px;flex-wrap:wrap;margin-top:20px;padding-top:16px;border-top:1px solid rgba(236,229,215,.14);font-family:var(--f-mono);font-size:.72rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:rgba(236,229,215,.72)}
   .rt-foot b{color:var(--sand);font-weight:500}
-  .route .rt-note{margin-top:clamp(22px,3vh,36px);color:var(--fog);font-family:var(--f-mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;text-align:center}
+  .route .rt-note{margin-top:clamp(22px,3vh,36px);color:rgba(236,229,215,.6);font-family:var(--f-mono);font-size:.7rem;letter-spacing:.09em;text-transform:uppercase;text-align:center}
   /* static fallback / mobile timeline */
   .rt-static{min-height:0;display:block}
   .rt-static .rt-stage{grid-template-columns:1fr;gap:0}
@@ -294,7 +297,7 @@
   .g-slide img{width:100%;height:100%;object-fit:cover}
   .g-slide::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(6,6,4,.76),rgba(6,6,4,.12) 48%,transparent 66%)}
   .g-cap{position:absolute;left:clamp(20px,3vw,44px);right:clamp(20px,3vw,44px);bottom:clamp(20px,3.4vh,38px);z-index:2;color:var(--cream)}
-  .g-cap .idx{font-family:var(--f-mono);font-size:.64rem;letter-spacing:.26em;color:var(--sand)}
+  .g-cap .idx{font-family:var(--f-mono);font-size:.74rem;font-weight:600;letter-spacing:.14em;color:#EFD9A8;text-shadow:0 1px 8px rgba(0,0,0,.7)}
   .g-cap h3{margin-top:10px;font-size:clamp(1.5rem,3vw,2.7rem);color:#F6EFE0;text-shadow:0 6px 30px rgba(0,0,0,.55)}
   .g-cap p{margin:9px 0 0;color:var(--cream-dim);font-size:clamp(.9rem,1.1vw,1.02rem);max-width:38ch}
   .g-foot{display:flex;align-items:center;gap:clamp(14px,2vw,26px);margin-top:clamp(26px,3.6vh,44px)}
@@ -326,11 +329,11 @@
   .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:44px;border-bottom:1px solid rgba(236,229,215,.1)}
   .foot-brand{font-family:var(--f-disp);font-size:2.4rem}
   .foot-brand i{font-style:normal;color:var(--amber-lt)}
-  .foot-brand .coord{font-family:var(--f-mono);font-size:.66rem;letter-spacing:.2em;color:var(--sand);margin-top:14px}
-  .foot-col h4{font-family:var(--f-mono);font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--fog);margin:0 0 16px}
+  .foot-brand .coord{font-family:var(--f-mono);font-size:.74rem;font-weight:600;letter-spacing:.1em;color:#E3C88E;margin-top:14px}
+  .foot-col h4{font-family:var(--f-mono);font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(236,229,215,.72);margin:0 0 16px}
   .foot-col a{display:block;padding:5px 0;color:var(--cream-dim);transition:color .3s}
   .foot-col a:hover{color:var(--amber-lt)}
-  .foot-bot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:26px;font-family:var(--f-mono);font-size:.62rem;letter-spacing:.12em;color:var(--fog)}
+  .foot-bot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:26px;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.06em;color:rgba(236,229,215,.6)}
   .foot-bot a{color:var(--sand)}
 
   /* ---------- reveal ---------- */
@@ -340,10 +343,12 @@
 
   /* ---------- responsive ---------- */
   @media (max-width:900px){
-    /* --- perf: cheap layers, no constantly-repainting effects --- */
-    .grain{inset:0;animation:none;opacity:.05}
-    .scene .meta{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(9,7,4,.68)}
+    /* --- perf: no fixed/blurred layers repainting while the page scrolls --- */
+    .grain{display:none}
+    .scene .meta{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(9,7,4,.72)}
+    .nav.scrolled{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(16,13,9,.94)}
     .hero-media,.scene-media,.closing-media,.band-bg{will-change:auto}
+    .rt-media,.g-slide,.about-figure .frame{box-shadow:0 18px 36px -22px rgba(0,0,0,.7)}
     .thread{display:none}.topbar{display:block}
     .facts-grid{grid-template-columns:repeat(2,1fr)}
     .foot-grid{grid-template-columns:1fr 1fr}
@@ -379,11 +384,11 @@
   /* ---- mobile premium pass ---- */
   @media (max-width:640px){
     .hero-inner{padding-bottom:clamp(22px,3.5vh,36px)}
-    .hero .eyebrow{font-size:.56rem;letter-spacing:.1em;gap:10px}
-    .hero .sub{font-size:1rem;margin-top:18px;max-width:94%}
-    .hero-facts .k{font-size:.52rem;letter-spacing:.16em}
-    .hero-facts b{font-size:1.12rem}
-    .hero-scroll{font-size:.58rem}
+    .hero .eyebrow{font-size:.66rem;letter-spacing:.1em;gap:10px}
+    .hero .sub{font-size:1.02rem;margin-top:18px;max-width:94%}
+    .hero-facts .k{font-size:.63rem;letter-spacing:.1em}
+    .hero-facts b{font-size:1.2rem}
+    .hero-scroll{font-size:.7rem}
     .manifesto{padding:clamp(84px,15vh,130px) 0}
     .manifesto .big{font-size:clamp(2.1rem,8.6vw,3.1rem)}
     .manifesto .note{margin-top:38px;font-size:1rem}
@@ -485,40 +490,46 @@
       <p class="note reveal">Полоса дюн шириной местами всего 400 метров держит равновесие между солёной Балтикой и пресным заливом. Люди веками учились не побеждать песок, а договариваться с ним — засаживая склоны соснами и травой.</p>
     </div>
     <div class="mf-right">
-      <div class="route3d reveal" id="route3d">
-        <div class="r3-corner tl"></div><div class="r3-corner tr"></div><div class="r3-corner bl"></div><div class="r3-corner br"></div>
-        <div class="r3-label"><span id="r3name">Куршская коса</span><i id="r3km">маршрут · 48 км</i></div>
-        <div class="r3-read"><b id="r3kmnow">0</b>из 48 км</div>
-        <div class="r3-stage">
-          <svg class="r3-svg" viewBox="0 0 400 460" aria-hidden="true">
-            <g class="r3-grid">
-              <line x1="60" y1="30" x2="60" y2="430"></line>
-              <line x1="130" y1="30" x2="130" y2="430"></line>
-              <line x1="200" y1="30" x2="200" y2="430"></line>
-              <line x1="270" y1="30" x2="270" y2="430"></line>
-              <line x1="340" y1="30" x2="340" y2="430"></line>
-              <line x1="30" y1="70" x2="370" y2="70"></line>
-              <line x1="30" y1="130" x2="370" y2="130"></line>
-              <line x1="30" y1="190" x2="370" y2="190"></line>
-              <line x1="30" y1="250" x2="370" y2="250"></line>
-              <line x1="30" y1="310" x2="370" y2="310"></line>
-              <line x1="30" y1="370" x2="370" y2="370"></line>
-              <line x1="30" y1="425" x2="370" y2="425"></line>
-            </g>
-            <path class="r3-road-bg" d="M212,34 C206,60 228,90 203,114 C168,148 183,181 214,210 C250,244 236,288 193,320 C150,352 158,398 205,428"></path>
-            <path class="r3-road" id="r3road" d="M212,34 C206,60 228,90 203,114 C168,148 183,181 214,210 C250,244 236,288 193,320 C150,352 158,398 205,428"></path>
-            <g id="r3pts">
-              <circle class="r3-pt" r="5" data-t="0" data-name="Зеленоградск" data-km="0 км · въезд"></circle>
-              <circle class="r3-pt" r="5" data-t="0.2" data-name="Лесной" data-km="11 км"></circle>
-              <circle class="r3-pt" r="5" data-t="0.4" data-name="Королевский бор" data-km="20 км"></circle>
-              <circle class="r3-pt" r="5" data-t="0.58" data-name="Фрингилла" data-km="32 км"></circle>
-              <circle class="r3-pt" r="6.5" data-t="0.8" data-name="Высота Эфа" data-km="42 км"></circle>
-              <circle class="r3-pt" r="5" data-t="1" data-name="Морское" data-km="48 км"></circle>
-            </g>
-            <circle class="r3-dot" id="r3dot" r="4.5" cx="212" cy="34"></circle>
-          </svg>
-        </div>
-      </div>
+      <figure class="section-cut reveal">
+        <svg viewBox="0 0 620 400" role="img" aria-label="Поперечный разрез Куршской косы: море, пляж, дюна, сосновый бор, залив">
+          <title>Разрез косы: от Балтики до залива</title>
+
+          <line class="cut-sea-line" x1="0" y1="300" x2="620" y2="300"></line>
+          <g class="cut-hatch">
+            <line x1="8" y1="312" x2="96" y2="312"></line><line x1="18" y1="324" x2="86" y2="324"></line>
+            <line x1="8" y1="336" x2="100" y2="336"></line><line x1="26" y1="348" x2="78" y2="348"></line>
+            <line x1="524" y1="312" x2="612" y2="312"></line><line x1="536" y1="324" x2="602" y2="324"></line>
+            <line x1="520" y1="336" x2="612" y2="336"></line><line x1="544" y1="348" x2="596" y2="348"></line>
+          </g>
+
+          <path class="cut-fill" d="M104,300 C140,296 156,286 178,272 C214,248 244,176 292,150 C338,126 356,196 392,224 C428,252 470,278 516,300 Z"></path>
+          <path class="cut-line" id="cutLine" d="M104,300 C140,296 156,286 178,272 C214,248 244,176 292,150 C338,126 356,196 392,224 C428,252 470,278 516,300"></path>
+
+          <g class="cut-trees">
+            <g class="tree"><line x1="352" y1="196" x2="352" y2="176"></line><path d="M346,178 L352,163 L358,178 Z"></path></g>
+            <g class="tree"><line x1="374" y1="212" x2="374" y2="190"></line><path d="M367,192 L374,175 L381,192 Z"></path></g>
+            <g class="tree"><line x1="398" y1="228" x2="398" y2="204"></line><path d="M391,206 L398,188 L405,206 Z"></path></g>
+            <g class="tree"><line x1="422" y1="243" x2="422" y2="221"></line><path d="M415,223 L422,206 L429,223 Z"></path></g>
+            <g class="tree"><line x1="447" y1="258" x2="447" y2="238"></line><path d="M441,240 L447,225 L453,240 Z"></path></g>
+            <g class="tree"><line x1="472" y1="272" x2="472" y2="254"></line><path d="M466,256 L472,242 L478,256 Z"></path></g>
+          </g>
+
+          <g class="cut-dim">
+            <line class="cut-dim-line" x1="104" y1="72" x2="516" y2="72"></line>
+            <line class="cut-tick" x1="104" y1="62" x2="104" y2="82"></line>
+            <line class="cut-tick" x1="516" y1="62" x2="516" y2="82"></line>
+            <rect class="cut-dim-bg" x="272" y="56" width="76" height="32" rx="16"></rect>
+            <text class="cut-dim-t" x="310" y="77" text-anchor="middle">400 м</text>
+          </g>
+
+          <line class="cut-h" x1="292" y1="150" x2="292" y2="108"></line>
+          <text class="cut-lab" x="292" y="102" text-anchor="middle">ДЮНА · 62 М</text>
+          <text class="cut-lab" x="14" y="290">БАЛТИЙСКОЕ МОРЕ</text>
+          <text class="cut-lab" x="606" y="290" text-anchor="end">КУРШСКИЙ ЗАЛИВ</text>
+          <text class="cut-lab cut-lab-soft" x="412" y="290" text-anchor="middle">СОСНОВЫЙ БОР</text>
+        </svg>
+        <figcaption>Поперечный разрез косы · схематично</figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -911,44 +922,67 @@
   var placeSecs = [].slice.call(document.querySelectorAll('[data-place]'));
   var spine = document.getElementById('rtSpine'),
       spineBox = document.querySelector('.route .rt-cards');
-  var curPlace = '';
-  function updateThread(){
-    var vh = window.innerHeight;
-    var max = document.body.scrollHeight - vh;
-    var p = max>0 ? Math.min(1, Math.max(0, scrollY()/max)) : 0;
-    if(fill) fill.style.height = (p*100)+'%';
-    if(tick) tick.style.top = (p*100)+'%';
-    if(topbar) topbar.style.width = (p*100)+'%';
-    var mid = vh*0.42, active = placeSecs[0] || null;
-    for(var i=0;i<placeSecs.length;i++){
-      if(placeSecs[i].getBoundingClientRect().top <= mid) active = placeSecs[i];
+  var curPlace = '', navOn = false;
+  /* all geometry is measured once (and on resize) — never inside the scroll frame,
+     otherwise every frame forces a layout and the page stutters on phones */
+  var geo = { vh:0, max:1, secs:[], spineTop:0, spineRun:1, threadOn:false };
+  function measure(){
+    var sy = window.pageYOffset || html.scrollTop;
+    geo.vh = window.innerHeight;
+    geo.max = Math.max(1, html.scrollHeight - geo.vh);
+    geo.threadOn = !!(fill && fill.offsetParent !== null);
+    geo.secs = placeSecs.map(function(el){
+      return { top: el.getBoundingClientRect().top + sy,
+               place: el.getAttribute('data-place'),
+               sub: el.getAttribute('data-sub') || '' };
+    });
+    if(spineBox){
+      var rb = spineBox.getBoundingClientRect();
+      geo.spineTop = rb.top + sy;
+      geo.spineRun = Math.max(1, rb.height - geo.vh * 0.4);
     }
-    if(active && active.getAttribute('data-place') !== curPlace){
-      curPlace = active.getAttribute('data-place');
+  }
+  function updateThread(){
+    var y = scrollY();
+    var p = Math.min(1, Math.max(0, y / geo.max));
+    if(geo.threadOn){
+      if(fill) fill.style.height = (p*100)+'%';
+      if(tick) tick.style.top = (p*100)+'%';
+    }
+    if(topbar) topbar.style.width = (p*100)+'%';
+
+    var mid = y + geo.vh * 0.42, active = geo.secs[0];
+    for(var i=0;i<geo.secs.length;i++){ if(geo.secs[i].top <= mid) active = geo.secs[i]; }
+    if(active && active.place !== curPlace){
+      curPlace = active.place;
       var cap = plName ? plName.parentNode : null, ap = active;
-      if(cap){
+      if(cap && geo.threadOn){
         cap.style.opacity = '0';
         setTimeout(function(){
-          if(plName) plName.textContent = ap.getAttribute('data-place');
-          if(plKm) plKm.textContent = ap.getAttribute('data-sub') || '';
+          if(plName) plName.textContent = ap.place;
+          if(plKm) plKm.textContent = ap.sub;
           cap.style.opacity = '1';
         }, 160);
       }
     }
-    if(nav) nav.classList.toggle('scrolled', scrollY() > 60);
+    var wantNav = y > 60;
+    if(nav && wantNav !== navOn){ navOn = wantNav; nav.classList.toggle('scrolled', wantNav); }
 
-    /* mobile: route spine fills as you walk the timeline */
-    if(spine && spineBox){
-      var b = spineBox.getBoundingClientRect();
-      var run = b.height - vh * 0.4;
-      var done = run > 0 ? (vh * 0.6 - b.top) / run : (b.top < 0 ? 1 : 0);
+    if(spine){
+      var done = (y + geo.vh * 0.6 - geo.spineTop) / geo.spineRun;
       spine.style.height = Math.max(0, Math.min(1, done)) * 100 + '%';
     }
   }
   var ticking=false;
   function onScroll(){ if(!ticking){ requestAnimationFrame(function(){ updateThread(); ticking=false; }); ticking=true; } }
   (lenis ? lenis.on('scroll', onScroll) : window.addEventListener('scroll', onScroll, {passive:true}));
-  window.addEventListener('resize', updateThread); updateThread();
+  var reTimer;
+  window.addEventListener('resize', function(){
+    clearTimeout(reTimer);
+    reTimer = setTimeout(function(){ measure(); updateThread(); }, 150);
+  });
+  window.addEventListener('load', function(){ measure(); updateThread(); });
+  measure(); updateThread();
 
   /* custom cursor removed — native cursor restored */
 
@@ -1121,30 +1155,19 @@
         scrollTrigger:{trigger:'.rt-map',start:'top 72%'}});
     }
 
-    /* mini 3D route panel — scroll-driven dot + progressive road + lit stops */
-    var r3road = document.getElementById('r3road');
-    if(r3road){
-      var r3len = r3road.getTotalLength();
-      var r3pts = [].slice.call(document.querySelectorAll('#r3pts .r3-pt'));
-      var r3dot = document.getElementById('r3dot');
-      var r3nameEl = document.getElementById('r3name'), r3kmEl = document.getElementById('r3km'), r3kmNow = document.getElementById('r3kmnow');
-      gsap.set(r3road,{strokeDasharray:r3len,strokeDashoffset:r3len});
-      function r3update(p){
-        p = Math.max(0,Math.min(1,p));
-        r3road.style.strokeDashoffset = r3len*(1-p);
-        var pt = r3road.getPointAtLength(r3len*p);
-        if(r3dot){ r3dot.setAttribute('cx',pt.x); r3dot.setAttribute('cy',pt.y); }
-        var active = r3pts[0];
-        r3pts.forEach(function(c){
-          var t = +c.getAttribute('data-t');
-          if(t <= p+0.001){ c.classList.add('lit'); active = c; } else { c.classList.remove('lit'); }
-        });
-        if(r3nameEl) r3nameEl.textContent = active.getAttribute('data-name');
-        if(r3kmEl) r3kmEl.textContent = active.getAttribute('data-km');
-        if(r3kmNow) r3kmNow.textContent = Math.round(p*48);
-      }
-      r3update(0);
-      ScrollTrigger.create({trigger:'#route3d',start:'top 80%',end:'bottom 34%',scrub:.7,onUpdate:function(self){ r3update(self.progress); }});
+    /* cross-section draws itself like an engraving */
+    var cutLine = document.getElementById('cutLine');
+    if(cutLine){
+      var CL = cutLine.getTotalLength();
+      gsap.set(cutLine,{strokeDasharray:CL,strokeDashoffset:CL});
+      gsap.to(cutLine,{strokeDashoffset:0,duration:1.6,ease:'power2.inOut',
+        scrollTrigger:{trigger:'.section-cut',start:'top 78%'}});
+      gsap.from('.section-cut .cut-fill',{opacity:0,duration:1.2,ease:'power2.out',
+        scrollTrigger:{trigger:'.section-cut',start:'top 78%'},delay:.5});
+      gsap.from('.section-cut .tree',{opacity:0,y:10,duration:.6,stagger:.08,ease:'power2.out',
+        scrollTrigger:{trigger:'.section-cut',start:'top 74%'},delay:.7});
+      gsap.from('.section-cut .cut-dim, .section-cut .cut-h, .section-cut .cut-lab',{opacity:0,duration:.8,ease:'power2.out',
+        scrollTrigger:{trigger:'.section-cut',start:'top 70%'},delay:1});
     }
     ScrollTrigger.refresh();
   } else {
