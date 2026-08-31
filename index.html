@@ -306,6 +306,10 @@
 
   /* ---------- responsive ---------- */
   @media (max-width:900px){
+    /* --- perf: cheap layers, no constantly-repainting effects --- */
+    .grain{inset:0;animation:none;opacity:.05}
+    .scene .meta{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(9,7,4,.68)}
+    .hero-media,.scene-media,.closing-media,.band-bg{will-change:auto}
     .thread{display:none}.topbar{display:block}
     .facts-grid{grid-template-columns:repeat(2,1fr)}
     .foot-grid{grid-template-columns:1fr 1fr}
@@ -818,9 +822,11 @@
   window.addEventListener('load', function(){ setTimeout(clearPre, 500); });
   setTimeout(clearPre, 3500);
 
-  /* ----- Lenis smooth scroll ----- */
+  /* ----- Lenis smooth scroll (desktop only: phones keep native momentum) ----- */
+  var isTouch = (window.matchMedia && (matchMedia('(pointer:coarse)').matches || matchMedia('(hover:none)').matches)) || window.innerWidth <= 900;
+  if(isTouch) html.classList.add('is-touch');
   var lenis = null, scrollY = function(){ return window.pageYOffset || html.scrollTop; };
-  if(window.Lenis && !reduce){
+  if(window.Lenis && !reduce && !isTouch){
     lenis = new Lenis({ duration:1.35, easing:function(t){return Math.min(1,1.001-Math.pow(2,-10*t));}, wheelMultiplier:.82, touchMultiplier:1.6, smoothWheel:true });
     scrollY = function(){ return lenis.scroll; };
     if(hasGSAP){
@@ -1030,13 +1036,15 @@
       gsap.fromTo(el,{yPercent:110},{yPercent:0,duration:1.1,ease:'power4.out',
         scrollTrigger:{trigger:el.closest('.big'),start:'top 78%'},delay:i*0.06});
     });
-    /* hero parallax */
-    gsap.to('#heroMedia',{yPercent:22,ease:'none',scrollTrigger:{trigger:'#top',start:'top top',end:'bottom top',scrub:1.5}});
-    /* scene image parallax */
-    gsap.utils.toArray('.scene-media, .closing-media').forEach(function(m){
-      gsap.fromTo(m,{yPercent:-8},{yPercent:8,ease:'none',
-        scrollTrigger:{trigger:m.parentElement,start:'top bottom',end:'bottom top',scrub:1.5}});
-    });
+    /* hero + scene parallax — desktop only (heavy full-screen transforms janked phones) */
+    if(!isTouch){
+      gsap.to('#heroMedia',{yPercent:22,ease:'none',
+        scrollTrigger:{trigger:'#top',start:'top top',end:'bottom top',scrub:1.5}});
+      gsap.utils.toArray('.scene-media, .closing-media').forEach(function(m){
+        gsap.fromTo(m,{yPercent:-8},{yPercent:8,ease:'none',
+          scrollTrigger:{trigger:m.parentElement,start:'top bottom',end:'bottom top',scrub:1.5}});
+      });
+    }
     /* count-ups */
     gsap.utils.toArray('.fact .n').forEach(function(el){
       ScrollTrigger.create({trigger:el,start:'top 85%',once:true,onEnter:function(){countUp(el);}});
