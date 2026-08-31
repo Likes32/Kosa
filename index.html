@@ -203,6 +203,7 @@
   .rt-cap{fill:var(--sand);font-family:var(--f-mono);font-size:11px;letter-spacing:.2em}
   .rt-axis{fill:rgba(236,229,215,.3);font-family:var(--f-mono);font-size:10px;letter-spacing:.16em}
   .route .rt-hint{margin-top:16px;text-align:center;color:var(--fog);font-family:var(--f-mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase}
+  .route .rt-spine{display:none}
   .route .rt-cards{display:grid;position:relative}
   .rt-card{grid-area:1/1;opacity:0;transform:translateY(26px) scale(.985);transition:opacity .7s var(--ease),transform .7s var(--ease);pointer-events:none}
   .rt-card.on{opacity:1;transform:none;pointer-events:auto}
@@ -316,11 +317,13 @@
     .route{min-height:0;display:block}
     .route .rt-stage{grid-template-columns:1fr;gap:0}
     .route .rt-map{display:none}
-    .route .rt-cards{display:block;padding-left:32px}
-    .route .rt-cards::before{content:"";position:absolute;left:8px;top:10px;bottom:10px;width:1px;background:rgba(236,229,215,.18)}
+    .route .rt-cards{display:block;padding-left:40px}
+    .route .rt-cards::before{content:"";position:absolute;left:11px;top:12px;bottom:12px;width:2px;border-radius:2px;background:rgba(236,229,215,.15)}
+    .route .rt-spine{display:block;position:absolute;left:11px;top:12px;bottom:12px;width:2px;border-radius:2px;overflow:hidden}
+    .route .rt-spine i{display:block;width:100%;height:0;background:linear-gradient(180deg,var(--amber-lt),var(--amber));box-shadow:0 0 12px rgba(215,154,68,.65)}
     .route .rt-card{opacity:1;transform:none;pointer-events:auto;position:relative;margin-bottom:clamp(38px,6vh,64px)}
     .route .rt-card:last-child{margin-bottom:0}
-    .route .rt-card::before{content:"";position:absolute;left:-29px;top:12px;width:11px;height:11px;border-radius:50%;background:var(--night);border:2px solid var(--amber-lt);box-shadow:0 0 10px rgba(215,154,68,.5)}
+    .route .rt-card::before{content:"";position:absolute;left:-35px;top:14px;width:14px;height:14px;border-radius:50%;background:var(--night);border:2px solid var(--amber-lt);box-shadow:0 0 12px rgba(215,154,68,.55)}
     .g-slide{flex:0 0 min(86vw,760px)}
     .g-track{padding-inline:calc((100vw - min(86vw,760px)) / 2)}
   }
@@ -608,6 +611,7 @@
       </div>
 
       <div class="rt-cards">
+        <span class="rt-spine" aria-hidden="true"><i id="rtSpine"></i></span>
         <article class="rt-card on">
           <div class="rt-media"><img class="grade" src="photos/dune-view.jpg" loading="lazy" alt="Тропа через дюнную траву к заливу у въезда на косу"><span class="rt-num">Остановка 01 / 07</span></div>
           <div class="rt-body">
@@ -857,6 +861,8 @@
       plName = document.getElementById('threadPl'), plKm = document.getElementById('threadKm'),
       topbar = document.getElementById('topbar');
   var placeSecs = [].slice.call(document.querySelectorAll('[data-place]'));
+  var spine = document.getElementById('rtSpine'),
+      spineBox = document.querySelector('.route .rt-cards');
   var curPlace = '';
   function updateThread(){
     var vh = window.innerHeight;
@@ -882,6 +888,14 @@
       }
     }
     if(nav) nav.classList.toggle('scrolled', scrollY() > 60);
+
+    /* mobile: route spine fills as you walk the timeline */
+    if(spine && spineBox){
+      var b = spineBox.getBoundingClientRect();
+      var run = b.height - vh * 0.4;
+      var done = run > 0 ? (vh * 0.6 - b.top) / run : (b.top < 0 ? 1 : 0);
+      spine.style.height = Math.max(0, Math.min(1, done)) * 100 + '%';
+    }
   }
   var ticking=false;
   function onScroll(){ if(!ticking){ requestAnimationFrame(function(){ updateThread(); ticking=false; }); ticking=true; } }
