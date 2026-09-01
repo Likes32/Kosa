@@ -355,6 +355,18 @@
   .js .reveal{opacity:0;transform:translateY(42px)}
   .js .reveal.is-in{opacity:1;transform:none;transition:opacity 1s var(--ease),transform 1s var(--ease)}
   .no-fx .reveal,.no-fx .reveal-line>span{opacity:1 !important;transform:none !important}
+  /* lite: engaged automatically when the browser can't keep up (in-app webviews).
+     Everything stays visible and readable — only the costly finishes drop away. */
+  .lite .reveal{opacity:1 !important;transform:none !important;transition:none !important}
+  .lite .g-slide{opacity:1 !important;transform:none !important;transition:none !important}
+  .lite .rt-media,.lite .g-slide,.lite .rt-card,.lite .hero-strip{box-shadow:none !important}
+  .lite .scene h2,.lite .scene .txt,.lite .scene .detail,.lite .g-cap h3,.lite .g-cap .idx,
+  .lite .hero h1,.lite .hero .sub,.lite .hero .eyebrow,.lite .hero-facts .k,.lite .hero-facts b,
+  .lite .hero-scroll,.lite .rt-num{text-shadow:none !important}
+  .lite .rt-card,.lite .rt-stop,.lite .rt-name,.lite .rt-km,.lite .rt-ring,.lite .rt-trail{transition:none !important}
+  .lite .rt-trail,.lite .rt-dot{filter:none !important}
+  .lite .hero-media img{animation:none !important;transform:scale(1.04) !important}
+  .lite{scroll-behavior:auto !important}
 
   /* ---------- responsive ---------- */
   @media (max-width:900px){
@@ -1018,7 +1030,27 @@
     }
   }
   var ticking=false;
-  function onScroll(){ if(!ticking){ requestAnimationFrame(function(){ updateThread(); ticking=false; }); ticking=true; } }
+  /* Some in-app browsers (Telegram's, Instagram's) composite far less efficiently
+     than Safari or Chrome. Rather than assume, watch the first stretch of real
+     scrolling: if frames keep running long, drop to a lighter mode for good. */
+  var pfN = 0, pfSlow = 0, pfLast = 0, pfDone = false;
+  function perfSample(now){
+    if(pfDone) return;
+    if(pfLast){
+      if(now - pfLast > 40) pfSlow++;
+      if(++pfN >= 55){
+        pfDone = true;
+        if(pfSlow / pfN > 0.22) html.classList.add('lite');
+      }
+    }
+    pfLast = now;
+  }
+  function onScroll(){
+    if(!ticking){
+      requestAnimationFrame(function(now){ perfSample(now); updateThread(); ticking=false; });
+      ticking = true;
+    }
+  }
   (lenis ? lenis.on('scroll', onScroll) : window.addEventListener('scroll', onScroll, {passive:true}));
   /* iOS fires resize whenever the URL bar collapses/expands — that happens on every
      upward flick. Re-measuring the whole page there is what made scrolling up stutter,
