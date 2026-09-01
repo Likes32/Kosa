@@ -33,7 +33,10 @@
   ::selection{background:var(--amber);color:#fff}
 
   /* grade applied to all photography for cohesion */
-  .grade{filter:saturate(.84) contrast(1.06) brightness(1.01)}
+  /* color grade is baked into the JPEGs themselves now — a live filter() on every
+     full-bleed photo forced iOS Safari to re-run the GPU shader on scroll, which is
+     what was causing the stutter. Class kept as a harmless no-op so markup is untouched. */
+  .grade{}
 
   /* ---------- film grain ---------- */
   .grain{position:fixed;inset:-50%;z-index:9000;pointer-events:none;opacity:.06;
@@ -60,14 +63,15 @@
   /* ---------- journey thread (signature) ---------- */
   .thread{position:fixed;top:0;right:clamp(20px,3.4vw,46px);height:100vh;width:40px;z-index:70;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;mix-blend-mode:difference}
   .thread .rail{position:relative;width:1px;height:min(52vh,440px);background:rgba(255,255,255,.28)}
-  .thread .fill{position:absolute;top:0;left:0;width:100%;height:0;background:var(--amber-lt)}
+  .thread .fill{position:absolute;top:0;left:0;width:100%;height:100%;background:var(--amber-lt);transform:scaleY(0);transform-origin:top}
   .thread .tick{position:absolute;left:50%;width:9px;height:1px;background:rgba(255,255,255,.55);transform:translateX(-50%)}
   .thread .cap{position:absolute;left:-14px;transform:translate(-100%,-50%);white-space:nowrap;text-align:right;color:#fff;transition:opacity .35s var(--ease)}
   .thread .cap .pl{font-family:var(--f-disp);font-size:1rem;font-weight:700;line-height:1}
   .thread .cap .km{font-family:var(--f-mono);font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;opacity:.75;margin-top:4px}
   .thread .ends{position:absolute;left:50%;transform:translateX(-50%);font-family:var(--f-mono);font-size:.58rem;letter-spacing:.2em;color:rgba(255,255,255,.6)}
   .thread .ends.top{top:-22px}.thread .ends.bot{bottom:-22px}
-  .topbar{position:fixed;top:0;left:0;height:2px;width:0;background:var(--amber);z-index:80;display:none}
+  .topbar{position:fixed;top:0;left:0;height:2px;width:100%;background:var(--amber);z-index:80;display:none;
+    transform:scaleX(0);transform-origin:0 50%;will-change:transform}
 
   /* ---------- nav ---------- */
   .nav{position:fixed;top:0;left:0;right:0;z-index:90;display:flex;align-items:center;justify-content:space-between;padding:clamp(16px,2.3vw,26px) clamp(20px,5vw,64px);color:#F1EADB;border:1px solid transparent;
@@ -358,7 +362,7 @@
     .route .rt-cards{display:block;padding-left:40px}
     .route .rt-cards::before{content:"";position:absolute;left:11px;top:12px;bottom:12px;width:2px;border-radius:2px;background:rgba(236,229,215,.15)}
     .route .rt-spine{display:block;position:absolute;left:11px;top:12px;bottom:12px;width:2px;border-radius:2px;overflow:hidden}
-    .route .rt-spine i{display:block;width:100%;height:0;background:linear-gradient(180deg,var(--amber-lt),var(--amber));box-shadow:0 0 12px rgba(215,154,68,.65)}
+    .route .rt-spine i{display:block;width:100%;height:100%;transform:scaleY(0);transform-origin:top;will-change:transform;background:linear-gradient(180deg,var(--amber-lt),var(--amber));box-shadow:0 0 12px rgba(215,154,68,.65)}
     .route .rt-card{opacity:1;transform:none;pointer-events:auto;position:relative;margin-bottom:clamp(38px,6vh,64px)}
     .route .rt-card:last-child{margin-bottom:0}
     .route .rt-card::before{content:"";position:absolute;left:-35px;top:14px;width:14px;height:14px;border-radius:50%;background:var(--night);border:2px solid var(--amber-lt);box-shadow:0 0 12px rgba(215,154,68,.55)}
@@ -536,36 +540,36 @@
 
 <!-- SCENES -->
 <div id="places">
-<section class="scene bl" data-place="Высота Эфа" data-sub="дюны">
-  <div class="scene-media"><img class="grade" src="photos/cine-dune.jpg" alt="Золотая кочующая дюна, стекающая к морю"></div>
+<section class="scene bl" data-place="Королевский бор" data-sub="6-й км">
+  <div class="scene-media"><img class="grade" src="photos/cine-pine.jpg" alt="Реликтовый хвойный лес Королевского бора в тумане"></div>
   <div class="scene-scrim"></div>
   <div class="wrap"><div class="scene-body">
-    <p class="meta mono reveal">01 — Дюны · 62 метра</p>
-    <h2 class="reveal">Высота Эфа</h2>
-    <p class="txt reveal">Дюна Ореховая поднимается на 55 метров, а её гребень — Высоту Эфа — почти на 62. Названа в честь Франца Эфа, лесовода, который на рубеже XIX–XX веков укротил ползущие пески, засадив склоны горной сосной. Дюны и сейчас смещаются на несколько метров в год — под ними погребены целые старые посёлки. С деревянных настилов открываются разом и открытое море, и тихий залив.</p>
-    <p class="detail mono reveal">Смещение песка · до нескольких метров в год</p>
+    <p class="meta mono reveal">6-й км · тропа 2,8 км · ~1 час</p>
+    <h2 class="reveal">Королевский бор</h2>
+    <p class="txt reveal">Первая тропа после въезда — и единственный участок косы, где старый лес устоял перед песком. Здесь прусские короли держали охотничьи угодья, отсюда и название. Тропа ведёт мимо вековых елей и посадок туи через старую почтовую дорогу, по которой везли корреспонденцию из Кёнигсберга в Мемель.</p>
+    <p class="detail mono reveal">Начните отсюда · тропа лёгкая, с настилами</p>
   </div></div>
 </section>
 
-<section class="scene br" data-place="Танцующий лес" data-sub="лес">
-  <div class="scene-media"><img class="grade" src="photos/dancing-forest.jpg" alt="Сосны Танцующего леса, свёрнутые в кольца"></div>
-  <div class="scene-scrim"></div>
-  <div class="wrap"><div class="scene-body">
-    <p class="meta mono reveal">02 — Лес</p>
-    <h2 class="reveal">Танцующий лес</h2>
-    <p class="txt reveal">Этот сосновый участок высадили в 1960-х, чтобы закрепить пески. Но деревья выросли скрученными в кольца, петли и спирали — единой разгадки нет до сих пор. Винят и гусениц побеговьюна, и постоянный ветер, и подвижность почвы под корнями. Местные верят: пройдёшь сквозь кольцо ствола — прибавишь год жизни, поэтому самые хрупкие деревья теперь огорожены.</p>
-    <p class="detail mono reveal">Высажен · 1960-е · загадка без ответа</p>
-  </div></div>
-</section>
-
-<section class="scene cc" data-place="Птичий мост" data-sub="птицы">
+<section class="scene br" data-place="Фрингилла" data-sub="23-й км">
   <div class="scene-media"><img class="grade" src="photos/cine-birds.jpg" alt="Стая птиц над тростником на закате"></div>
   <div class="scene-scrim"></div>
   <div class="wrap"><div class="scene-body">
-    <p class="meta mono reveal">03 — Небо · 10 000 000</p>
-    <h2 class="reveal">Птичий мост</h2>
-    <p class="txt reveal">Коса лежит на Беломоро-Балтийском пролётном пути — узком воздушном коридоре, которым дважды в год идут до десяти миллионов птиц. В 1901 году в Росситтене орнитолог Иоганнес Тинеман основал здесь одну из первых в мире станций кольцевания — «Фрингиллу». Гигантские ловушки-воронки высотой с пятиэтажный дом ловят птиц живыми: их считают, кольцуют и отпускают дальше на юг.</p>
-    <p class="detail mono reveal">Станция «Фрингилла» · с 1901 года</p>
+    <p class="meta mono reveal">23-й км · экскурсия ~1 час · сезон</p>
+    <h2 class="reveal">Станция «Фрингилла»</h2>
+    <p class="txt reveal">Полевой стационар биостанции «Рыбачий» — старейшей в мире станции кольцевания птиц, основанной в 1901 году. Коса лежит на Беломоро-Балтийском пролётном пути: дважды в год над ней идут до десяти миллионов птиц. Ловушки-воронки высотой с пятиэтажный дом ловят их живыми — при вас окольцуют и отпустят.</p>
+    <p class="detail mono reveal">Работает в миграцию · апрель — октябрь</p>
+  </div></div>
+</section>
+
+<section class="scene cc" data-place="Танцующий лес" data-sub="37-й км">
+  <div class="scene-media"><img class="grade" src="photos/dancing-forest.jpg" alt="Сосны Танцующего леса, свёрнутые в кольца"></div>
+  <div class="scene-scrim"></div>
+  <div class="wrap"><div class="scene-body">
+    <p class="meta mono reveal">37-й км · тропа 0,8 км · ~40 минут</p>
+    <h2 class="reveal">Танцующий лес</h2>
+    <p class="txt reveal">Самая короткая тропа парка и самая известная. Сосны высадили в 1960-х, чтобы закрепить пески, но деревья выросли скрученными в кольца и спирали — разгадки нет до сих пор. Винят гусениц побеговьюна, ветер и подвижность почвы. Ходить можно только по настилам: корни здесь легко вытаптываются.</p>
+    <p class="detail mono reveal">Самая быстрая остановка · удобно совместить с Эфа</p>
   </div></div>
 </section>
 
@@ -946,10 +950,10 @@
     var y = scrollY();
     var p = Math.min(1, Math.max(0, y / geo.max));
     if(geo.threadOn){
-      if(fill) fill.style.height = (p*100)+'%';
+      if(fill) fill.style.transform = 'scaleY(' + p + ')';
       if(tick) tick.style.top = (p*100)+'%';
     }
-    if(topbar) topbar.style.width = (p*100)+'%';
+    if(topbar) topbar.style.transform = 'scaleX(' + p + ')';
 
     var mid = y + geo.vh * 0.42, active = geo.secs[0];
     for(var i=0;i<geo.secs.length;i++){ if(geo.secs[i].top <= mid) active = geo.secs[i]; }
@@ -970,7 +974,7 @@
 
     if(spine){
       var done = (y + geo.vh * 0.6 - geo.spineTop) / geo.spineRun;
-      spine.style.height = Math.max(0, Math.min(1, done)) * 100 + '%';
+      spine.style.transform = 'scaleY(' + Math.max(0, Math.min(1, done)) + ')';
     }
   }
   var ticking=false;
@@ -1117,7 +1121,7 @@
     requestAnimationFrame(step);
   }
 
-  if(hasGSAP && !reduce){
+  if(hasGSAP && !reduce && !isTouch){
     gsap.registerPlugin(ScrollTrigger);
     if(lenis) ScrollTrigger.scrollerProxy ? null : null;
     ScrollTrigger.defaults({ scroller: window });
@@ -1171,18 +1175,41 @@
     }
     ScrollTrigger.refresh();
   } else {
-    /* fallback: reveal + counts via IntersectionObserver */
-    html.classList.add('no-fx');
+    /* phones (and no-GSAP): same reveals, but driven by CSS transitions fired once
+       by IntersectionObserver — zero per-frame JS while the finger is scrolling */
+    if(reduce) html.classList.add('no-fx');
     var rtSecFb = document.querySelector('.route');
     if(rtSecFb) rtSecFb.classList.add('rt-static');
+
+    /* one-time line drawing, then the browser animates it on its own */
+    function armLine(el, dur){
+      if(!el) return null;
+      var L = el.getTotalLength();
+      el.style.strokeDasharray = L;
+      el.style.strokeDashoffset = L;
+      if(!reduce) el.style.transition = 'stroke-dashoffset ' + dur + 's cubic-bezier(.19,1,.22,1)';
+      return el;
+    }
+    var mRoad = armLine(document.getElementById('rtRoad'), 1.8);
+    var mCut  = armLine(document.getElementById('cutLine'), 1.6);
+
     if('IntersectionObserver' in window){
       var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('is-in');io.unobserve(en.target);}});},{threshold:.12});
       document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
       var io2=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){countUp(en.target);io2.unobserve(en.target);}});},{threshold:.5});
       document.querySelectorAll('.fact .n').forEach(function(el){io2.observe(el);});
+      var io3=new IntersectionObserver(function(es){es.forEach(function(en){
+        if(!en.isIntersecting) return;
+        if(en.target === mRoad || en.target === mCut){ en.target.style.strokeDashoffset = 0; }
+        io3.unobserve(en.target);
+      });},{threshold:.15});
+      if(mRoad) io3.observe(mRoad);
+      if(mCut) io3.observe(mCut);
     } else {
       document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('is-in');});
       document.querySelectorAll('.fact .n').forEach(countUp);
+      if(mRoad) mRoad.style.strokeDashoffset = 0;
+      if(mCut) mCut.style.strokeDashoffset = 0;
     }
   }
 })();
