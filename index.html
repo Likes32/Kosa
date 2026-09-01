@@ -24,8 +24,10 @@
   }
   *{box-sizing:border-box}
   html{-webkit-font-smoothing:antialiased}
-  body{margin:0;background:var(--night);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.7;
-    overflow-x:hidden;overflow-x:clip}
+  /* no overflow-x here on purpose: it turns <body> into a scroll container,
+     which is a known source of scroll stutter in iOS Safari. The only full-bleed
+     element clips itself inside its own section instead. */
+  body{margin:0;background:var(--night);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.7}
   img{display:block;max-width:100%}
   a{color:inherit;text-decoration:none}
   h1,h2,h3{font-family:var(--f-disp);font-weight:700;margin:0;line-height:1.02;letter-spacing:-.015em}
@@ -39,10 +41,8 @@
      what was causing the stutter. Class kept as a harmless no-op so markup is untouched. */
   .grade{}
 
-  /* ---------- film grain ---------- */
-  .grain{position:fixed;inset:0;z-index:9000;pointer-events:none;opacity:.05;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    }
+  /* film grain removed: a full-viewport fixed overlay above all content stops the
+     browser from simply shifting painted tiles while scrolling. It cost more than it showed. */
 
   /* ---------- custom cursor ---------- */
   .cursor{width:38px;height:38px;border:1px solid rgba(255,255,255,.7);transition:width .3s var(--ease),height .3s var(--ease),background .3s,opacity .3s}
@@ -78,6 +78,7 @@
 
   /* ---------- nav ---------- */
   .nav{position:fixed;top:0;left:0;right:0;z-index:90;display:flex;align-items:center;justify-content:space-between;padding:clamp(16px,2.3vw,26px) clamp(20px,5vw,64px);color:#F1EADB;border:1px solid transparent;
+    transform:translateZ(0);
     transition:padding .55s var(--ease),left .55s var(--ease),right .55s var(--ease),top .55s var(--ease),background .5s ease,border-radius .55s var(--ease),box-shadow .5s ease,border-color .5s ease}
   .nav .brand,.nav .links a,.nav .burger span{text-shadow:0 1px 14px rgba(0,0,0,.5)}
   .nav.scrolled{top:12px;left:clamp(10px,3vw,26px);right:clamp(10px,3vw,26px);padding:11px clamp(16px,2.4vw,30px);
@@ -292,7 +293,7 @@
   .fact .c{margin-top:14px;color:#6a6153;font-size:.95rem;max-width:20ch}
 
   /* ---------- gallery: full-bleed cinematic rail ---------- */
-  .gallery{background:var(--night);padding:clamp(80px,12vh,150px) 0;overflow:hidden}
+  .gallery{background:var(--night);padding:clamp(80px,12vh,150px) 0;overflow-x:hidden;overflow-x:clip}
   .gallery .g-head{color:var(--cream);display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:clamp(28px,4vh,48px)}
   .gallery .g-head h2{font-size:clamp(1.9rem,4.4vw,3.2rem)}
   .gallery .g-head .mono{color:var(--sand)}
@@ -358,7 +359,6 @@
   /* ---------- responsive ---------- */
   @media (max-width:900px){
     /* --- perf: no fixed/blurred layers repainting while the page scrolls --- */
-    .grain{display:none}
     .scene .meta{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(9,7,4,.72)}
     .nav.scrolled{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(16,13,9,.94)}
     .hero-media,.scene-media,.closing-media,.band-bg{will-change:auto}
@@ -434,13 +434,11 @@
     .hero .eyebrow span,.hero h1 .l span,.hero .sub,.hero-strip{transform:none;opacity:1}
     .hero .eyebrow::before{transform:scaleX(1)}
     .js .reveal{opacity:1;transform:none}
-    .grain{display:none}
   }
 </style>
 </head>
 <body>
 
-<div class="grain" aria-hidden="true"></div>
 
 <div class="preloader" id="preloader" aria-hidden="true">
   <div class="pl-word"><span>Куршская&nbsp;коса</span></div>
@@ -1022,10 +1020,16 @@
   var ticking=false;
   function onScroll(){ if(!ticking){ requestAnimationFrame(function(){ updateThread(); ticking=false; }); ticking=true; } }
   (lenis ? lenis.on('scroll', onScroll) : window.addEventListener('scroll', onScroll, {passive:true}));
-  var reTimer;
+  /* iOS fires resize whenever the URL bar collapses/expands — that happens on every
+     upward flick. Re-measuring the whole page there is what made scrolling up stutter,
+     so only a real layout change (width, or a big height jump) triggers a re-measure. */
+  var reTimer, lastW = window.innerWidth, lastH = window.innerHeight;
   window.addEventListener('resize', function(){
+    var w = window.innerWidth, h = window.innerHeight;
+    if(w === lastW && Math.abs(h - lastH) < 160) return;
+    lastW = w; lastH = h;
     clearTimeout(reTimer);
-    reTimer = setTimeout(function(){ measure(); updateThread(); }, 150);
+    reTimer = setTimeout(function(){ measure(); updateThread(); }, 200);
   });
   window.addEventListener('load', function(){ measure(); updateThread(); });
   measure(); updateThread();
