@@ -244,6 +244,15 @@
   .rt-axis{fill:rgba(236,229,215,.6);font-family:var(--f-mono);font-size:11.5px;font-weight:600;letter-spacing:.1em}
   .route .rt-hint{margin-top:16px;text-align:center;color:rgba(236,229,215,.7);font-family:var(--f-mono);font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
   .route .rt-spine{display:none}
+  .rt-tips{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:clamp(38px,5vh,64px);
+    background:rgba(236,229,215,.13);border:1px solid rgba(236,229,215,.13);border-radius:16px;overflow:hidden}
+  .rt-tips .tip{background:var(--night);padding:clamp(20px,2.4vw,28px)}
+  .rt-tips .k{display:block;font-family:var(--f-mono);font-size:.68rem;font-weight:600;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--sand);margin-bottom:10px}
+  .rt-tips b{display:block;font-family:var(--f-disp);font-weight:700;font-size:clamp(1.1rem,1.5vw,1.32rem);color:#F6EFE0;line-height:1.15}
+  .rt-tips p{margin:10px 0 0;font-size:.94rem;line-height:1.6;color:rgba(236,229,215,.72)}
+  @media (max-width:900px){ .rt-tips{grid-template-columns:1fr 1fr} }
+  @media (max-width:600px){ .rt-tips{grid-template-columns:1fr} }
   .route .rt-cards{display:grid;position:relative}
   .rt-card{grid-area:1/1;opacity:0;transform:translateY(26px) scale(.985);transition:opacity .7s var(--ease),transform .7s var(--ease);pointer-events:none}
   .rt-card.on{opacity:1;transform:none;pointer-events:auto}
@@ -573,14 +582,14 @@
   </div></div>
 </section>
 
-<section class="scene bl" data-place="Два берега" data-sub="вода">
-  <div class="scene-media"><img class="grade" src="photos/cine-sea.jpg" alt="Хмурое Балтийское море в тумане"></div>
+<section class="scene bl" data-place="Высота Эфа" data-sub="42-й км">
+  <div class="scene-media"><img class="grade" src="photos/cine-dune.jpg" alt="Кочующая дюна, стекающая к морю"></div>
   <div class="scene-scrim"></div>
   <div class="wrap"><div class="scene-body">
-    <p class="meta mono reveal">04 — Вода</p>
-    <h2 class="reveal">Два берега</h2>
-    <p class="txt reveal">Ширина косы колеблется от 400 метров до четырёх километров — и всё это граница двух стихий. С запада бьёт открытая Балтика и после штормов выносит на песок янтарь. С востока, в паре сотен метров, стынет пресный Куршский залив с тростником и рыбацкими лодками. Между водами живут три посёлка — Лесной, Рыбачий и Морское, где до сих пор коптят рыбу по старым рецептам.</p>
-    <p class="detail mono reveal">Ширина косы · от 400 м до 4 км</p>
+    <p class="meta mono reveal">42-й км · тропа 2,8 км · ~1,5 часа</p>
+    <h2 class="reveal">Высота Эфа</h2>
+    <p class="txt reveal">Главная смотровая косы на гребне дюны Ореховой — 62 метра над морем. Названа в честь Франца Эфа, лесовода, который на рубеже XIX–XX веков остановил ползущие пески, засадив склоны горной сосной. С деревянных настилов видно разом открытую Балтику, залив и крыши посёлка Морское.</p>
+    <p class="detail mono reveal">Кульминация маршрута · подъём по настилам</p>
   </div></div>
 </section>
 </div>
@@ -590,7 +599,7 @@
   <div class="wrap">
     <div class="rt-head">
       <h2 class="reveal">Вся коса — одной дорогой</h2>
-      <span class="mono reveal">44 км · 7 остановок · с юга на север</span>
+      <span class="mono reveal">47 км · 8 остановок · с юга на север</span>
     </div>
 
     <div class="rt-stage">
@@ -598,74 +607,82 @@
         <svg viewBox="0 0 300 900" role="img" aria-label="Схема маршрута по Куршской косе с профилем высот">
           <title>Маршрут и профиль высот Куршской косы</title>
           <line class="rt-hair" x1="20" y1="50" x2="290" y2="50"></line>
-          <line class="rt-hair" x1="20" y1="185" x2="290" y2="185"></line>
-          <line class="rt-hair" x1="20" y1="320" x2="290" y2="320"></line>
-          <line class="rt-hair" x1="20" y1="455" x2="290" y2="455"></line>
-          <line class="rt-hair" x1="20" y1="590" x2="290" y2="590"></line>
-          <line class="rt-hair" x1="20" y1="725" x2="290" y2="725"></line>
-          <line class="rt-hair" x1="20" y1="860" x2="290" y2="860"></line>
+          <line class="rt-hair" x1="20" y1="166" x2="290" y2="166"></line>
+          <line class="rt-hair" x1="20" y1="282" x2="290" y2="282"></line>
+          <line class="rt-hair" x1="20" y1="398" x2="290" y2="398"></line>
+          <line class="rt-hair" x1="20" y1="514" x2="290" y2="514"></line>
+          <line class="rt-hair" x1="20" y1="630" x2="290" y2="630"></line>
+          <line class="rt-hair" x1="20" y1="746" x2="290" y2="746"></line>
+          <line class="rt-hair" x1="20" y1="862" x2="290" y2="862"></line>
 
           <text class="rt-axis" x="26" y="26">ПРОФИЛЬ ВЫСОТ</text>
-          <line class="rt-elev-base" x1="26" y1="40" x2="26" y2="870"></line>
-          <path class="rt-elev-fill" d="M26,50 L30,50 C32,110 33,150 35,185 C37,230 38,280 39,320 C38,370 37,410 36,455 C38,500 41,545 43,590 C55,635 72,680 80,725 C70,770 50,815 43,860 L26,860 Z"></path>
-          <path class="rt-elev" d="M30,50 C32,110 33,150 35,185 C37,230 38,280 39,320 C38,370 37,410 36,455 C38,500 41,545 43,590 C55,635 72,680 80,725 C70,770 50,815 43,860"></path>
-          <text class="rt-axis" x="88" y="722">62 М</text>
+          <line class="rt-elev-base" x1="26" y1="40" x2="26" y2="872"></line>
+          <path class="rt-elev-fill" d="M26,50 L30,50 C33,100 36,135 39,166 C37,205 34,250 33,282 C33,320 34,360 35,398 C43,437 55,480 64,514 C56,555 47,595 43,630 C55,668 72,710 80,746 C68,790 52,830 48,862 L26,862 Z"></path>
+          <path class="rt-elev" d="M30,50 C33,100 36,135 39,166 C37,205 34,250 33,282 C33,320 34,360 35,398 C43,437 55,480 64,514 C56,555 47,595 43,630 C55,668 72,710 80,746 C68,790 52,830 48,862"></path>
+          <text class="rt-axis" x="88" y="742">62 М</text>
 
           <text class="rt-cap" x="152" y="26" text-anchor="middle">СТАРТ</text>
-          <text class="rt-cap" x="150" y="888" text-anchor="middle">ФИНИШ</text>
+          <text class="rt-cap" x="148" y="890" text-anchor="middle">ФИНИШ</text>
 
-          <path class="rt-road-bg" d="M152,50 C142,95 124,140 128,185 C132,230 170,275 165,320 C160,365 122,410 127,455 C132,500 166,545 160,590 C154,635 122,680 130,725 C138,770 156,815 150,860"></path>
-          <path class="rt-road" id="rtRoad" d="M152,50 C142,95 124,140 128,185 C132,230 170,275 165,320 C160,365 122,410 127,455 C132,500 166,545 160,590 C154,635 122,680 130,725 C138,770 156,815 150,860"></path>
-          <path class="rt-trail" id="rtTrail" d="M152,50 C142,95 124,140 128,185 C132,230 170,275 165,320 C160,365 122,410 127,455 C132,500 166,545 160,590 C154,635 122,680 130,725 C138,770 156,815 150,860"></path>
+          <path class="rt-road-bg" d="M152,50 C142,90 124,130 128,166 C132,205 170,245 165,282 C160,320 122,360 127,398 C132,437 166,477 160,514 C154,552 122,592 130,630 C138,668 172,708 158,746 C150,784 142,824 148,862"></path>
+          <path class="rt-road" id="rtRoad" d="M152,50 C142,90 124,130 128,166 C132,205 170,245 165,282 C160,320 122,360 127,398 C132,437 166,477 160,514 C154,552 122,592 130,630 C138,668 172,708 158,746 C150,784 142,824 148,862"></path>
+          <path class="rt-trail" id="rtTrail" d="M152,50 C142,90 124,130 128,166 C132,205 170,245 165,282 C160,320 122,360 127,398 C132,437 166,477 160,514 C154,552 122,592 130,630 C138,668 172,708 158,746 C150,784 142,824 148,862"></path>
 
-          <g class="rt-g now" data-i="0" tabindex="0" role="button" aria-label="Зеленоградск, 0 км">
-            <rect class="rt-hit" x="20" y="18" width="270" height="64"></rect>
+          <g class="rt-g now" data-i="0" tabindex="0" role="button" aria-label="Зеленоградск, въезд на косу, 0 км">
+            <rect class="rt-hit" x="20" y="18" width="270" height="60"></rect>
             <circle class="rt-ring" cx="152" cy="50" r="13"></circle>
             <circle class="rt-stop" cx="152" cy="50" r="6"></circle>
             <text class="rt-name" x="186" y="47">Зеленоградск</text>
-            <text class="rt-km" x="186" y="63">0 км</text>
+            <text class="rt-km" x="186" y="63">0 км · въезд</text>
           </g>
           <g class="rt-g" data-i="1" tabindex="0" role="button" aria-label="Королевский бор, 6 км">
-            <rect class="rt-hit" x="20" y="153" width="270" height="64"></rect>
-            <circle class="rt-ring" cx="128" cy="185" r="13"></circle>
-            <circle class="rt-stop" cx="128" cy="185" r="6"></circle>
-            <text class="rt-name" x="186" y="182">Королевский бор</text>
-            <text class="rt-km" x="186" y="198">6 км</text>
+            <rect class="rt-hit" x="20" y="136" width="270" height="60"></rect>
+            <circle class="rt-ring" cx="128" cy="166" r="13"></circle>
+            <circle class="rt-stop" cx="128" cy="166" r="6"></circle>
+            <text class="rt-name" x="186" y="163">Королевский бор</text>
+            <text class="rt-km" x="186" y="179">6 км · тропа 2,8</text>
           </g>
-          <g class="rt-g" data-i="2" tabindex="0" role="button" aria-label="Лесной, 11 км">
-            <rect class="rt-hit" x="20" y="288" width="270" height="64"></rect>
-            <circle class="rt-ring" cx="165" cy="320" r="13"></circle>
-            <circle class="rt-stop" cx="165" cy="320" r="6"></circle>
-            <text class="rt-name" x="196" y="317">Лесной</text>
-            <text class="rt-km" x="196" y="333">11 км</text>
+          <g class="rt-g" data-i="2" tabindex="0" role="button" aria-label="Музейный комплекс, 14 км">
+            <rect class="rt-hit" x="20" y="252" width="270" height="60"></rect>
+            <circle class="rt-ring" cx="165" cy="282" r="13"></circle>
+            <circle class="rt-stop" cx="165" cy="282" r="6"></circle>
+            <text class="rt-name" x="192" y="279">Музейный комплекс</text>
+            <text class="rt-km" x="192" y="295">14 км · визит-центр</text>
           </g>
           <g class="rt-g" data-i="3" tabindex="0" role="button" aria-label="Станция Фрингилла, 23 км">
-            <rect class="rt-hit" x="20" y="423" width="270" height="64"></rect>
-            <circle class="rt-ring" cx="127" cy="455" r="13"></circle>
-            <circle class="rt-stop" cx="127" cy="455" r="6"></circle>
-            <text class="rt-name" x="186" y="452">Фрингилла</text>
-            <text class="rt-km" x="186" y="468">23 км</text>
+            <rect class="rt-hit" x="20" y="368" width="270" height="60"></rect>
+            <circle class="rt-ring" cx="127" cy="398" r="13"></circle>
+            <circle class="rt-stop" cx="127" cy="398" r="6"></circle>
+            <text class="rt-name" x="186" y="395">Фрингилла</text>
+            <text class="rt-km" x="186" y="411">23 км · птицы</text>
           </g>
-          <g class="rt-g" data-i="4" tabindex="0" role="button" aria-label="Танцующий лес, 37 км">
-            <rect class="rt-hit" x="20" y="558" width="270" height="64"></rect>
-            <circle class="rt-ring" cx="160" cy="590" r="13"></circle>
-            <circle class="rt-stop" cx="160" cy="590" r="6"></circle>
-            <text class="rt-name" x="191" y="587">Танцующий лес</text>
-            <text class="rt-km" x="191" y="603">37 км</text>
+          <g class="rt-g" data-i="4" tabindex="0" role="button" aria-label="Высота Мюллера, 32 км">
+            <rect class="rt-hit" x="20" y="484" width="270" height="60"></rect>
+            <circle class="rt-ring" cx="160" cy="514" r="13"></circle>
+            <circle class="rt-stop" cx="160" cy="514" r="6"></circle>
+            <text class="rt-name" x="188" y="511">Высота Мюллера</text>
+            <text class="rt-km" x="188" y="527">32 км · тропа 3,5</text>
           </g>
-          <g class="rt-g" data-i="5" tabindex="0" role="button" aria-label="Высота Эфа, 42 км">
-            <rect class="rt-hit" x="20" y="693" width="270" height="64"></rect>
-            <circle class="rt-ring" cx="130" cy="725" r="13"></circle>
-            <circle class="rt-stop" cx="130" cy="725" r="7.5"></circle>
-            <text class="rt-name" x="186" y="722">Высота Эфа</text>
-            <text class="rt-km" x="186" y="738">42 км · 62 м</text>
+          <g class="rt-g" data-i="5" tabindex="0" role="button" aria-label="Танцующий лес, 37 км">
+            <rect class="rt-hit" x="20" y="600" width="270" height="60"></rect>
+            <circle class="rt-ring" cx="130" cy="630" r="13"></circle>
+            <circle class="rt-stop" cx="130" cy="630" r="6"></circle>
+            <text class="rt-name" x="186" y="627">Танцующий лес</text>
+            <text class="rt-km" x="186" y="643">37 км · тропа 0,8</text>
           </g>
-          <g class="rt-g" data-i="6" tabindex="0" role="button" aria-label="Морское, 44 км">
-            <rect class="rt-hit" x="20" y="828" width="270" height="64"></rect>
-            <circle class="rt-ring" cx="150" cy="860" r="13"></circle>
-            <circle class="rt-stop" cx="150" cy="860" r="6"></circle>
-            <text class="rt-name" x="186" y="857">Морское</text>
-            <text class="rt-km" x="186" y="873">44 км</text>
+          <g class="rt-g" data-i="6" tabindex="0" role="button" aria-label="Высота Эфа, 42 км">
+            <rect class="rt-hit" x="20" y="716" width="270" height="60"></rect>
+            <circle class="rt-ring" cx="158" cy="746" r="13"></circle>
+            <circle class="rt-stop" cx="158" cy="746" r="7.5"></circle>
+            <text class="rt-name" x="186" y="743">Высота Эфа</text>
+            <text class="rt-km" x="186" y="759">42 км · 62 м</text>
+          </g>
+          <g class="rt-g" data-i="7" tabindex="0" role="button" aria-label="Озеро Лебедь, 47 км">
+            <rect class="rt-hit" x="20" y="832" width="270" height="60"></rect>
+            <circle class="rt-ring" cx="148" cy="862" r="13"></circle>
+            <circle class="rt-stop" cx="148" cy="862" r="6"></circle>
+            <text class="rt-name" x="186" y="859">Озеро Лебедь</text>
+            <text class="rt-km" x="186" y="875">47 км · тропа 4,0</text>
           </g>
 
           <circle class="rt-dot" id="rtDot" cx="152" cy="50" r="4.5"></circle>
@@ -676,78 +693,95 @@
       <div class="rt-cards">
         <span class="rt-spine" aria-hidden="true"><i id="rtSpine"></i></span>
         <article class="rt-card on">
-          <div class="rt-media"><img class="grade" src="photos/dune-view.jpg" loading="lazy" alt="Тропа через дюнную траву к заливу у въезда на косу"><span class="rt-num">Остановка 01 / 07</span></div>
+          <div class="rt-media"><img class="grade" src="photos/dune-view.jpg" loading="lazy" alt="Тропа через дюнную траву к заливу у въезда на косу"><span class="rt-num">Остановка 01 / 08</span></div>
           <div class="rt-body">
-            <div class="rt-meta"><span class="rt-badge">0 км</span><span class="rt-time">начало пути</span></div>
+            <div class="rt-meta"><span class="rt-badge">0 км</span><span class="rt-time">старт · КПП парка</span></div>
             <h3>Зеленоградск</h3>
-            <p>Курортный город, где заканчивается материк и начинается песчаная нить. Здесь же КПП национального парка — дальше коса живёт по своим правилам.</p>
-            <div class="rt-foot"><span>54.96° N · 20.48° E</span><span><b>Вход:</b> эко-сбор парка</span></div>
+            <p>Отсюда начинается коса. На въезде — КПП национального парка, где платят экологический сбор: с человека и отдельно за машину. Здесь же последние крупные магазины и заправка — дальше на 47 километров только посёлки.</p>
+            <div class="rt-foot"><span><b>Что сделать:</b> заправиться, купить воду</span><span><b>Дальше:</b> 6 км до первой тропы</span></div>
           </div>
         </article>
 
         <article class="rt-card">
-          <div class="rt-media"><img class="grade" src="photos/cine-path.jpg" loading="lazy" alt="Старая лесная дорога в тумане среди вековых деревьев"><span class="rt-num">Остановка 02 / 07</span></div>
+          <div class="rt-media"><img class="grade" src="photos/cine-path.jpg" loading="lazy" alt="Старая лесная дорога в тумане среди вековых деревьев"><span class="rt-num">Остановка 02 / 08</span></div>
           <div class="rt-body">
-            <div class="rt-meta"><span class="rt-badge">6 км</span><span class="rt-time">10 минут в пути</span></div>
+            <div class="rt-meta"><span class="rt-badge">6 км</span><span class="rt-time">тропа 2,8 км · ~1 час</span></div>
             <h3>Королевский бор</h3>
-            <p>Единственный участок косы, где древние деревья устояли перед песком. Вековые туи и ели, а рядом — старая почтовая дорога, по которой возили королевскую почту.</p>
-            <div class="rt-foot"><span>55.00° N · 20.55° E</span><span><b>Экотропа:</b> 2,9 км</span></div>
+            <p>Первая тропа и единственный участок, где старый лес устоял перед песком: вековые ели, посадки туи и старая почтовая дорога Кёнигсберг — Мемель. Здесь были королевские охотничьи угодья.</p>
+            <div class="rt-foot"><span><b>Сложность:</b> лёгкая, настилы</span><span><b>Кому:</b> с детьми, с коляской</span></div>
           </div>
         </article>
 
         <article class="rt-card">
-          <div class="rt-media"><img class="grade" src="photos/aerial.jpg" loading="lazy" alt="Посёлок Лесной с высоты: узкая полоса между морем и заливом"><span class="rt-num">Остановка 03 / 07</span></div>
+          <div class="rt-media"><img class="grade" src="photos/lagoon.jpg" loading="lazy" alt="Берег Куршского залива с лодкой у музейного комплекса"><span class="rt-num">Остановка 03 / 08</span></div>
           <div class="rt-body">
-            <div class="rt-meta"><span class="rt-badge">11 км</span><span class="rt-time">15 минут в пути</span></div>
-            <h3>Лесной</h3>
-            <p>Самое узкое место косы: от моря до залива всего 400 метров. Обе воды видно с одной точки — слева штормовая Балтика, справа зеркальный залив.</p>
-            <div class="rt-foot"><span>55.03° N · 20.59° E</span><span><b>Ширина:</b> 400 м</span></div>
+            <div class="rt-meta"><span class="rt-badge">14 км</span><span class="rt-time">~1,5 часа</span></div>
+            <h3>Музейный комплекс</h3>
+            <p>Визит-центр парка на берегу залива: музей природы, дендрарий, вольеры и «Древняя Самбия». Лучшее место, чтобы понять, как устроена коса, — заезжайте сюда до дюн, а не после.</p>
+            <div class="rt-foot"><span><b>Что внутри:</b> музей, дендрарий</span><span><b>Совет:</b> начните понимание отсюда</span></div>
           </div>
         </article>
 
         <article class="rt-card">
-          <div class="rt-media"><img class="grade" src="photos/cine-flock.jpg" loading="lazy" alt="Силуэты птиц в облачном небе над косой"><span class="rt-num">Остановка 04 / 07</span></div>
+          <div class="rt-media"><img class="grade" src="photos/cine-flock.jpg" loading="lazy" alt="Силуэты птиц в облачном небе над косой"><span class="rt-num">Остановка 04 / 08</span></div>
           <div class="rt-body">
-            <div class="rt-meta"><span class="rt-badge">23 км</span><span class="rt-time">30 минут в пути</span></div>
-            <h3>Фрингилла</h3>
-            <p>Старейшая в мире станция кольцевания птиц, работающая с 1901 года. Ловушки-воронки высотой с пятиэтажный дом ловят птиц живыми: их считают, кольцуют и отпускают дальше.</p>
-            <div class="rt-foot"><span>55.15° N · 20.75° E</span><span><b>Сезон:</b> апрель — октябрь</span></div>
+            <div class="rt-meta"><span class="rt-badge">23 км</span><span class="rt-time">экскурсия ~1 час</span></div>
+            <h3>Станция «Фрингилла»</h3>
+            <p>Полевой стационар биостанции «Рыбачий» — старейшей в мире станции кольцевания птиц (с 1901 года). Ловушки высотой с пятиэтажный дом ловят птиц живыми; при вас окольцуют и отпустят.</p>
+            <div class="rt-foot"><span><b>Сезон:</b> апрель — октябрь</span><span><b>Важно:</b> только с экскурсией</span></div>
           </div>
         </article>
 
         <article class="rt-card">
-          <div class="rt-media"><img class="grade" src="photos/dancing-forest.jpg" loading="lazy" alt="Сосны Танцующего леса, свёрнутые в кольца"><span class="rt-num">Остановка 05 / 07</span></div>
+          <div class="rt-media"><img class="grade" src="photos/forest.jpg" loading="lazy" alt="Высокий сосновый лес на склоне дюны"><span class="rt-num">Остановка 05 / 08</span></div>
           <div class="rt-body">
-            <div class="rt-meta"><span class="rt-badge">37 км</span><span class="rt-time">45 минут в пути</span></div>
+            <div class="rt-meta"><span class="rt-badge">32 км</span><span class="rt-time">тропа 3,5 км · ~1,5 часа</span></div>
+            <h3>Высота Мюллера</h3>
+            <p>Смотровая площадка над посёлком Рыбачий на дюне Брухберг. Названа в честь лесничего Людвига Мюллера, остановившего эту дюну. Сверху — залив, лес и черепичные крыши посёлка.</p>
+            <div class="rt-foot"><span><b>Сложность:</b> подъём по лестнице</span><span><b>Меньше людей:</b> чем на Эфа</span></div>
+          </div>
+        </article>
+
+        <article class="rt-card">
+          <div class="rt-media"><img class="grade" src="photos/dancing2.jpg" loading="lazy" alt="Скрученные стволы сосен Танцующего леса"><span class="rt-num">Остановка 06 / 08</span></div>
+          <div class="rt-body">
+            <div class="rt-meta"><span class="rt-badge">37 км</span><span class="rt-time">тропа 0,8 км · ~40 минут</span></div>
             <h3>Танцующий лес</h3>
-            <p>Сосны, скрученные в кольца и спирали, высадили в 1960-х, чтобы удержать пески. Почему они выросли такими — единой разгадки нет до сих пор.</p>
-            <div class="rt-foot"><span>55.24° N · 20.87° E</span><span><b>Тропа:</b> 0,8 км</span></div>
+            <p>Самая короткая тропа парка и самая известная. Сосны, высаженные в 1960-х, выросли скрученными в кольца и спирали — разгадки нет до сих пор. Сходить с настилов нельзя: корни вытаптываются.</p>
+            <div class="rt-foot"><span><b>Сложность:</b> лёгкая</span><span><b>Совет:</b> совместить с Эфа</span></div>
           </div>
         </article>
 
         <article class="rt-card">
-          <div class="rt-media"><img class="grade" src="photos/cine-boardwalk.jpg" loading="lazy" alt="Деревянный настил, ведущий на гребень дюны"><span class="rt-num">Остановка 06 / 07</span></div>
+          <div class="rt-media"><img class="grade" src="photos/cine-boardwalk.jpg" loading="lazy" alt="Деревянный настил, ведущий на гребень дюны"><span class="rt-num">Остановка 07 / 08</span></div>
           <div class="rt-body">
-            <div class="rt-meta"><span class="rt-badge">42 км</span><span class="rt-time">50 минут в пути</span></div>
+            <div class="rt-meta"><span class="rt-badge">42 км</span><span class="rt-time">тропа 2,8 км · ~1,5 часа</span></div>
             <h3>Высота Эфа</h3>
-            <p>Высшая точка маршрута — 62 метра над морем. С деревянных настилов видно разом открытую Балтику, залив и черепичные крыши Морского.</p>
-            <div class="rt-foot"><span>55.27° N · 20.92° E</span><span><b>Высота:</b> 62 м</span></div>
+            <p>Кульминация маршрута: гребень дюны Ореховой, 62 метра над морем. Две смотровые площадки — с них разом видно открытую Балтику, залив и посёлок Морское. Самое людное место косы.</p>
+            <div class="rt-foot"><span><b>Когда идти:</b> утром или к закату</span><span><b>Сложность:</b> подъём по настилам</span></div>
           </div>
         </article>
 
         <article class="rt-card">
-          <div class="rt-media"><img class="grade" src="photos/cine-boats.jpg" loading="lazy" alt="Рыбацкие лодки в тростнике на рассвете в тумане"><span class="rt-num">Остановка 07 / 07</span></div>
+          <div class="rt-media"><img class="grade" src="photos/cine-boats.jpg" loading="lazy" alt="Тростник и лодки на рассвете в тумане у озера"><span class="rt-num">Остановка 08 / 08</span></div>
           <div class="rt-body">
-            <div class="rt-meta"><span class="rt-badge">44 км</span><span class="rt-time">55 минут в пути</span></div>
-            <h3>Морское</h3>
-            <p>Последний посёлок перед литовской границей. Рыбацкий край, где до сих пор коптят рыбу по старым рецептам, а дюна подходит к домам вплотную.</p>
-            <div class="rt-foot"><span>55.29° N · 20.94° E</span><span><b>Дальше:</b> граница</span></div>
+            <div class="rt-meta"><span class="rt-badge">47 км</span><span class="rt-time">тропа 4 км · ~2 часа</span></div>
+            <h3>Озеро Лебедь</h3>
+            <p>Самая дальняя и самая тихая тропа, почти у литовской границы. Пресное озеро, отделённое от залива песчаной косой, тростники и птицы. Дальше — только погранзона.</p>
+            <div class="rt-foot"><span><b>Сложность:</b> самая длинная тропа</span><span><b>Кому:</b> ради тишины и птиц</span></div>
           </div>
         </article>
       </div>
     </div>
 
-    <p class="rt-note">Схема условная · расстояния не в масштабе</p>
+    <p class="rt-note">Схема условная · расстояния не в масштабе · весь маршрут — полный день</p>
+
+    <div class="rt-tips reveal">
+      <div class="tip"><span class="k">Как доехать</span><b>Автобус №593</b><p>Калининград — Морское идёт вдоль всей косы и останавливается у троп. На машине — через Зеленоградск.</p></div>
+      <div class="tip"><span class="k">Вход в парк</span><b>Эко-сбор на КПП</b><p>Платится на въезде: отдельно с человека и отдельно за автомобиль. Тропы после этого бесплатны.</p></div>
+      <div class="tip"><span class="k">Сколько времени</span><b>Полный день</b><p>Все восемь остановок — с утра до заката. За полдня успеть три-четыре: бор, Фрингилла, лес и Эфа.</p></div>
+      <div class="tip"><span class="k">Что учесть</span><b>Только по настилам</b><p>Сходить с троп запрещено — песок и корни держатся хрупко. Возьмите воду и ветровку: на дюнах всегда ветер.</p></div>
+    </div>
   </div>
 </section>
 
@@ -996,8 +1030,8 @@
       rtDot = document.getElementById('rtDot'),
       rtGroups = [].slice.call(document.querySelectorAll('.rt-g')),
       rtCards = [].slice.call(document.querySelectorAll('.rt-card')),
-      rtPts = [[152,50],[128,185],[165,320],[127,455],[160,590],[130,725],[150,860]],
-      rtT = [0, 1/6, 2/6, 0.5, 4/6, 5/6, 1],
+      rtPts = [[152,50],[128,166],[165,282],[127,398],[160,514],[130,630],[158,746],[148,862]],
+      rtT = [0, 1/7, 2/7, 3/7, 4/7, 5/7, 6/7, 1],
       rtActive = -1, rtTrailLen = 0;
 
   if(rtTrail){
