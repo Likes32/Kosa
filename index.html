@@ -24,7 +24,8 @@
   }
   *{box-sizing:border-box}
   html{-webkit-font-smoothing:antialiased}
-  body{margin:0;background:var(--night);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.7;overflow-x:hidden}
+  body{margin:0;background:var(--night);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.7;
+    overflow-x:hidden;overflow-x:clip}
   img{display:block;max-width:100%}
   a{color:inherit;text-decoration:none}
   h1,h2,h3{font-family:var(--f-disp);font-weight:700;margin:0;line-height:1.02;letter-spacing:-.015em}
@@ -39,10 +40,9 @@
   .grade{}
 
   /* ---------- film grain ---------- */
-  .grain{position:fixed;inset:-50%;z-index:9000;pointer-events:none;opacity:.06;
+  .grain{position:fixed;inset:0;z-index:9000;pointer-events:none;opacity:.05;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    animation:grain 6s steps(6) infinite}
-  @keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-6%,4%)}40%{transform:translate(4%,-5%)}60%{transform:translate(-3%,3%)}80%{transform:translate(5%,2%)}100%{transform:translate(0,0)}}
+    }
 
   /* ---------- custom cursor ---------- */
   .cursor,.cursor-dot{position:fixed;top:0;left:0;z-index:9500;pointer-events:none;border-radius:50%;transform:translate(-50%,-50%);mix-blend-mode:difference}
@@ -94,7 +94,7 @@
 
   /* ---------- hero ---------- */
   .hero{position:relative;height:100svh;min-height:620px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end}
-  .hero-media{position:absolute;inset:-4% 0;z-index:1;will-change:transform}
+  .hero-media{position:absolute;inset:-4% 0;z-index:1}
   .hero-media img{width:100%;height:100%;object-fit:cover;transform:scale(1.04);animation:heroZoom 22s ease-out forwards}
   @keyframes heroZoom{to{transform:scale(1.13)}}
   .hero-scrim{position:absolute;inset:0;z-index:2;background:
@@ -187,7 +187,7 @@
 
   /* ---------- scenes ---------- */
   .scene{position:relative;height:100svh;min-height:600px;overflow:hidden;display:flex;color:var(--cream)}
-  .scene-media{position:absolute;inset:-8% 0;z-index:1;will-change:transform}
+  .scene-media{position:absolute;inset:0;z-index:1}
   .scene-media img{width:100%;height:100%;object-fit:cover}
   .scene-scrim{position:absolute;inset:0;z-index:2}
   .scene.bl{align-items:flex-end;justify-content:flex-start;text-align:left}
@@ -327,7 +327,7 @@
 
   /* ---------- closing ---------- */
   .closing{position:relative;min-height:100svh;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--cream)}
-  .closing-media{position:absolute;inset:-8% 0;z-index:1;will-change:transform}
+  .closing-media{position:absolute;inset:0;z-index:1}
   .closing-media img{width:100%;height:100%;object-fit:cover}
   .closing-scrim{position:absolute;inset:0;z-index:2;background:linear-gradient(0deg,rgba(20,10,2,.72),rgba(40,20,4,.2) 55%,rgba(20,10,2,.5))}
   .closing-body{position:relative;z-index:3;padding:60px clamp(22px,5vw,40px);max-width:760px}
@@ -361,6 +361,9 @@
     .scene .meta{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(9,7,4,.72)}
     .nav.scrolled{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(16,13,9,.94)}
     .hero-media,.scene-media,.closing-media,.band-bg{will-change:auto}
+    /* skip rendering full-screen scenes while they are off screen.
+       Their height is fixed by CSS, so nothing shifts. */
+    .scene{content-visibility:auto;contain-intrinsic-size:auto 100svh}
     .rt-media,.g-slide,.about-figure .frame{box-shadow:0 18px 36px -22px rgba(0,0,0,.7)}
     .thread{display:none}.topbar{display:block}
     .facts-grid{grid-template-columns:repeat(2,1fr)}
@@ -467,7 +470,7 @@
 
 <!-- HERO -->
 <header class="hero" id="top" data-place="Куршская коса" data-sub="старт">
-  <div class="hero-media" id="heroMedia"><img class="grade" src="photos/cine-hero.jpg" alt="Туманный берег Куршской косы на рассвете"></div>
+  <div class="hero-media" id="heroMedia"><img class="grade" src="photos/cine-hero.jpg" fetchpriority="high" decoding="async" alt="Туманный берег Куршской косы на рассвете"></div>
   <div class="hero-scrim"></div>
   <div class="hero-inner">
     <div class="wrap">
@@ -550,7 +553,7 @@
 <!-- SCENES -->
 <div id="places">
 <section class="scene bl" data-place="Королевский бор" data-sub="6-й км">
-  <div class="scene-media"><img class="grade" src="photos/cine-pine.jpg" alt="Реликтовый хвойный лес Королевского бора в тумане"></div>
+  <div class="scene-media"><img class="grade" src="photos/cine-pine.jpg" loading="lazy" decoding="async" alt="Реликтовый хвойный лес Королевского бора в тумане"></div>
   <div class="scene-scrim"></div>
   <div class="wrap"><div class="scene-body">
     <p class="meta mono reveal">6-й км · тропа 2,8 км · ~1 час</p>
@@ -561,7 +564,7 @@
 </section>
 
 <section class="scene br" data-place="Фрингилла" data-sub="23-й км">
-  <div class="scene-media"><img class="grade" src="photos/cine-birds.jpg" alt="Стая птиц над тростником на закате"></div>
+  <div class="scene-media"><img class="grade" src="photos/cine-birds.jpg" loading="lazy" decoding="async" alt="Стая птиц над тростником на закате"></div>
   <div class="scene-scrim"></div>
   <div class="wrap"><div class="scene-body">
     <p class="meta mono reveal">23-й км · экскурсия ~1 час · сезон</p>
@@ -572,7 +575,7 @@
 </section>
 
 <section class="scene cc" data-place="Танцующий лес" data-sub="37-й км">
-  <div class="scene-media"><img class="grade" src="photos/dancing-forest.jpg" alt="Сосны Танцующего леса, свёрнутые в кольца"></div>
+  <div class="scene-media"><img class="grade" src="photos/dancing-forest.jpg" loading="lazy" decoding="async" alt="Сосны Танцующего леса, свёрнутые в кольца"></div>
   <div class="scene-scrim"></div>
   <div class="wrap"><div class="scene-body">
     <p class="meta mono reveal">37-й км · тропа 0,8 км · ~40 минут</p>
@@ -583,7 +586,7 @@
 </section>
 
 <section class="scene bl" data-place="Высота Эфа" data-sub="42-й км">
-  <div class="scene-media"><img class="grade" src="photos/cine-dune.jpg" alt="Кочующая дюна, стекающая к морю"></div>
+  <div class="scene-media"><img class="grade" src="photos/cine-dune.jpg" loading="lazy" decoding="async" alt="Кочующая дюна, стекающая к морю"></div>
   <div class="scene-scrim"></div>
   <div class="wrap"><div class="scene-body">
     <p class="meta mono reveal">42-й км · тропа 2,8 км · ~1,5 часа</p>
@@ -857,7 +860,7 @@
 
 <!-- CLOSING -->
 <section class="closing" id="visit" data-place="Золотой час" data-sub="закат">
-  <div class="closing-media"><img class="grade" src="photos/sunset.jpg" alt="Закат над Балтийским морем"></div>
+  <div class="closing-media"><img class="grade" src="photos/sunset.jpg" loading="lazy" decoding="async" alt="Закат над Балтийским морем"></div>
   <div class="closing-scrim"></div>
   <div class="closing-body">
     <p class="eyebrow mono reveal">Золотой час</p>
@@ -928,7 +931,9 @@
   if(isTouch) html.classList.add('is-touch');
   var lenis = null, scrollY = function(){ return window.pageYOffset || html.scrollTop; };
   if(window.Lenis && !reduce && !isTouch){
-    lenis = new Lenis({ duration:1.35, easing:function(t){return Math.min(1,1.001-Math.pow(2,-10*t));}, wheelMultiplier:.82, touchMultiplier:1.6, smoothWheel:true });
+    /* lerp keeps it smooth but responsive; a long `duration` made the page
+       glide on after the wheel stopped, which reads as lag */
+    lenis = new Lenis({ lerp:0.14, wheelMultiplier:1, smoothWheel:true });
     scrollY = function(){ return lenis.scroll; };
     if(hasGSAP){
       lenis.on('scroll', ScrollTrigger.update);
@@ -1170,14 +1175,11 @@
       gsap.fromTo(el,{yPercent:110},{yPercent:0,duration:1.1,ease:'power4.out',
         scrollTrigger:{trigger:el.closest('.big'),start:'top 78%'},delay:i*0.06});
     });
-    /* hero + scene parallax — desktop only (heavy full-screen transforms janked phones) */
+    /* parallax on the hero only. Moving six full-screen images every frame
+       meant six huge textures being recomposited at once — that was the weight. */
     if(!isTouch){
-      gsap.to('#heroMedia',{yPercent:22,ease:'none',
-        scrollTrigger:{trigger:'#top',start:'top top',end:'bottom top',scrub:1.5}});
-      gsap.utils.toArray('.scene-media, .closing-media').forEach(function(m){
-        gsap.fromTo(m,{yPercent:-8},{yPercent:8,ease:'none',
-          scrollTrigger:{trigger:m.parentElement,start:'top bottom',end:'bottom top',scrub:1.5}});
-      });
+      gsap.to('#heroMedia',{yPercent:18,ease:'none',
+        scrollTrigger:{trigger:'#top',start:'top top',end:'bottom top',scrub:true}});
     }
     /* count-ups */
     gsap.utils.toArray('.fact .n').forEach(function(el){
