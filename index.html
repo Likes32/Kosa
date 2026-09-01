@@ -187,7 +187,7 @@
 
   /* ---------- scenes ---------- */
   .scene{position:relative;height:100svh;min-height:600px;overflow:hidden;display:flex;color:var(--cream)}
-  .scene-media{position:absolute;inset:0;z-index:1}
+  .scene-media{position:absolute;inset:0;z-index:1;background:var(--night)}
   .scene-media img{width:100%;height:100%;object-fit:cover}
   .scene-scrim{position:absolute;inset:0;z-index:2}
   .scene.bl{align-items:flex-end;justify-content:flex-start;text-align:left}
@@ -327,7 +327,7 @@
 
   /* ---------- closing ---------- */
   .closing{position:relative;min-height:100svh;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--cream)}
-  .closing-media{position:absolute;inset:0;z-index:1}
+  .closing-media{position:absolute;inset:0;z-index:1;background:var(--night)}
   .closing-media img{width:100%;height:100%;object-fit:cover}
   .closing-scrim{position:absolute;inset:0;z-index:2;background:linear-gradient(0deg,rgba(20,10,2,.72),rgba(40,20,4,.2) 55%,rgba(20,10,2,.5))}
   .closing-body{position:relative;z-index:3;padding:60px clamp(22px,5vw,40px);max-width:760px}
@@ -361,9 +361,8 @@
     .scene .meta{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(9,7,4,.72)}
     .nav.scrolled{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(16,13,9,.94)}
     .hero-media,.scene-media,.closing-media,.band-bg{will-change:auto}
-    /* skip rendering full-screen scenes while they are off screen.
-       Their height is fixed by CSS, so nothing shifts. */
-    .scene{content-visibility:auto;contain-intrinsic-size:auto 100svh}
+    /* NB: content-visibility:auto was tried here and made scrolling back UP
+       stutter — released scenes had to be re-rendered on the way up. */
     .rt-media,.g-slide,.about-figure .frame{box-shadow:0 18px 36px -22px rgba(0,0,0,.7)}
     .thread{display:none}.topbar{display:block}
     .facts-grid{grid-template-columns:repeat(2,1fr)}
